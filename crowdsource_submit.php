@@ -1,10 +1,10 @@
 <?php
-# @name: marc_viewer_submit.php
+# @name: crowdsource_submit.php
 # @version: 0.1
-# @creation_date: 2019-02-15
-# @license: GNU General Public License version 3 (GPLv3) <https://www.gnu.org/licenses/gpl-3.0.en.html>
+# @creation_date: 2019-03-08
+# @license: The MIT License <https://opensource.org/licenses/MIT>
 # @author: Simon Bowie <sb174@soas.ac.uk>
-# @purpose: 
+# @purpose: A prototype of a web application to crowdsource cataloguing for SOAS' bibliographic records
 ?>
 
 <?php

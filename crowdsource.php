@@ -2,7 +2,7 @@
 # @name: crowdsource.php
 # @version: 0.1
 # @creation_date: 2019-03-08
-# @license: GNU General Public License version 3 (GPLv3) <https://www.gnu.org/licenses/gpl-3.0.en.html>
+# @license: The MIT License <https://opensource.org/licenses/MIT>
 # @author: Simon Bowie <sb174@soas.ac.uk>
 # @purpose: A prototype of a web application to crowdsource cataloguing for SOAS' bibliographic records
 ?>
