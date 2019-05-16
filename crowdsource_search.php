@@ -12,7 +12,7 @@
 <?php
 	$solrurl = 'http://james.lis.soas.ac.uk:8983/solr/bib/select?fl=bibIdentifier&fq=DocType:item&fq=Language_search:Bengali&indent=on&q=Title_search:' . $_POST["search"] . '%20OR%20Author_search:' . $_POST["search"] . '%20OR%20Publisher_search:' . $_POST["search"] . '%20OR%20PublicationDate_search:' . $_POST["search"] . '%20OR%20PublicationPlace_search:' . $_POST["search"] . '&rows=5000&wt=xml';
 	#$solrurl = 'http://james.lis.soas.ac.uk:8983/solr/bib/select?fl=bibIdentifier,Title_display,Author_display,Publisher_display,PublicationPlace_display,PublicationDate_display&fq=DocType:item&fq=Language_search:Bengali&indent=on&q=Title_search:' . $_POST["search"] . '%20OR%20Author_search:' . $_POST["search"] . '%20OR%20Publisher_search:' . $_POST["search"] . '%20OR%20PublicationDate_search:' . $_POST["search"] . '%20OR%20PublicationPlace_search:' . $_POST["search"] . '&rows=5000&wt=xml';
-	
+
 	# Perform Curl request on the Solr API
 	$ch = curl_init();
 	$queryParams = $bib_id;
@@ -38,6 +38,7 @@
 		#print_r($xml->result->doc);
 		foreach ($xml->result->doc as $result){
 			foreach ($result->arr->str as $id){
+								
 				$bib_id = ltrim($id, "wbm-");
 				$baseurl = 'https://james.lis.soas.ac.uk:8443/oledocstore/documentrest/';
 				$retrieve_bib = '/bib/doc?bibId=';
@@ -59,6 +60,14 @@
 				$content = simplexml_load_string($content);
 			
 				echo "<h3>Record</h3>";
+			
+				foreach ($content->record->controlfield as $controlfield) {
+					if ((string) $controlfield['tag'] == '001') {
+						echo (string) $controlfield;
+					}
+				}
+				
+				echo "<br/>";
 			
 				foreach ($content->record->datafield as $datafield) {
 					if ((string) $datafield['tag'] == '245') {
@@ -102,6 +111,7 @@
 ?>
 				
 			<form action="crowdsource_edit.php" method="POST">
+
 				<input type="hidden" value="
 			<?php 
 				foreach ($content->record->controlfield as $controlfield) {
@@ -115,6 +125,7 @@
 				<div>
 					<input type="submit" name="submit" value="Edit">
 				</div>
+			</form>
 <?php
 			}
 		}
