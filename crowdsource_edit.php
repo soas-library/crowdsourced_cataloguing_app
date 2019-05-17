@@ -19,7 +19,12 @@
         return $data;
     }
 
-	$bib_id = test_input($_POST["id"]);
+	if (isset($_POST)) {	
+		$bib_id = test_input($_POST["id"]);
+	}
+	
+	//RESUME WORK HERE
+	
 	$baseurl = 'https://james.lis.soas.ac.uk:8443/oledocstore/documentrest/';
 	$retrieve_bib = '/bib/doc?bibId=';
 	
