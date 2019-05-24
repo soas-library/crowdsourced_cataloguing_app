@@ -10,12 +10,13 @@
 <body>
 
 <?php
-	$solrurl = 'http://james.lis.soas.ac.uk:8983/solr/bib/select?fl=bibIdentifier&fq=DocType:item&fq=Language_search:Bengali&indent=on&q=Title_search:' . $_POST["search"] . '%20OR%20Author_search:' . $_POST["search"] . '%20OR%20Publisher_search:' . $_POST["search"] . '%20OR%20PublicationDate_search:' . $_POST["search"] . '%20OR%20PublicationPlace_search:' . $_POST["search"] . '&rows=5000&wt=xml';
+	$search = urlencode($_POST["search"]);
+
+	$solrurl = 'http://james.lis.soas.ac.uk:8983/solr/bib/select?fl=bibIdentifier&fq=DocType:bibliographic&fq=Language_search:Bengali&indent=on&q=Title_search:' . $search . '%20OR%20Author_search:' . $search . '%20OR%20Publisher_search:' . $search . '%20OR%20PublicationDate_search:' . $search . '%20OR%20PublicationPlace_search:' . $search . '&rows=5000&wt=xml';
 	#$solrurl = 'http://james.lis.soas.ac.uk:8983/solr/bib/select?fl=bibIdentifier,Title_display,Author_display,Publisher_display,PublicationPlace_display,PublicationDate_display&fq=DocType:item&fq=Language_search:Bengali&indent=on&q=Title_search:' . $_POST["search"] . '%20OR%20Author_search:' . $_POST["search"] . '%20OR%20Publisher_search:' . $_POST["search"] . '%20OR%20PublicationDate_search:' . $_POST["search"] . '%20OR%20PublicationPlace_search:' . $_POST["search"] . '&rows=5000&wt=xml';
 
 	# Perform Curl request on the Solr API
 	$ch = curl_init();
-	$queryParams = $bib_id;
 	curl_setopt($ch, CURLOPT_URL, $solrurl);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 	curl_setopt($ch, CURLOPT_HEADER, FALSE);
@@ -38,7 +39,7 @@
 		#print_r($xml->result->doc);
 		foreach ($xml->result->doc as $result){
 			foreach ($result->arr->str as $id){
-								
+																
 				$bib_id = ltrim($id, "wbm-");
 				$baseurl = 'https://james.lis.soas.ac.uk:8443/oledocstore/documentrest/';
 				$retrieve_bib = '/bib/doc?bibId=';

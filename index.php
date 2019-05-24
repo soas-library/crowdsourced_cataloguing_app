@@ -11,7 +11,7 @@
 <body>
 Help us learn Bengali<br><br>
 
-<a href='crowdsource_random.php'>Give me a random book</a><br><br>
+<a href='crowdsource_edit.php'>Give me a random book</a><br><br>
 
 <form action="crowdsource_search.php" method="POST"> 
 	<input type="text" name="search" placeholder="Search for a book"> 

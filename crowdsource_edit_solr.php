@@ -37,18 +37,16 @@
 		# Turn the API response into useful XML
 		$xml = new SimpleXMLElement($response); 
 
-		$random = rand(0,4061);
+		$random = rand(0,3605);
 	
 		$bib_id = $xml->result->doc[$random]->arr->str;
 	}
 	
-	$baseurl = 'https://james.lis.soas.ac.uk:8443/oledocstore/documentrest';
-	$retrieve_bib = '/bib/doc?bibId=';
+	$solrurl = 'http://james.lis.soas.ac.uk:8983/solr/bib/select?rows=1&wt=xml&q=controlfield_001:';
 	
-	# Perform Curl request on the OLE API
+	# Perform Curl request on the Solr API
 	$ch = curl_init();
-	$queryParams = $bib_id;
-	curl_setopt($ch, CURLOPT_URL, $baseurl . $retrieve_bib . $queryParams);
+	curl_setopt($ch, CURLOPT_URL, $solrurl . $bib_id);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 	curl_setopt($ch, CURLOPT_HEADER, FALSE);
 	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
@@ -57,10 +55,10 @@
 	
 	# Turn the API response into useful XML
 	$xml = new SimpleXMLElement($response); 
+
+	$bib = $xml->result->doc;
 	
-	$content = $xml->content;
-	#$content = simplexml_load_string($content);
-	
+	print_r ($bib);
 ?>
 	<form action="crowdsource_submit.php" method="POST">
 		<fieldset>
@@ -68,28 +66,19 @@
 			<strong>Title: </strong>
 <?php
 
-				#$content = str_replace('xmlns=', 'ns=', $content); 
-				#var_dump($content->xpath('//collection'));
-				print_r($content->asXML());
-				
-				foreach ($content->record->datafield as $datafield) {
-					if ((string) $datafield['tag'] == '245') {
-						foreach ($datafield->subfield as $subfield) {
-							echo (string) $subfield . " ";
+				foreach ($bib->arr as $field) {
+					if (stripos ((string)$field['name'],'245')) {
+						foreach ($field->str as $string) {
+							echo (string) $string . " ";
 						}
 					}
 				}
-				
-				foreach ($content->record->datafield as $datafield) {
-					if ((string) $datafield['tag'] == '880') {
-						foreach ($datafield->subfield as $subfield) {
-							#print_r($subfield);
-
-							print_r(array_values($subfield));
 							
-							if (array_search('245-01',$subfield)) {
-								print_r ($subfield);
-							}
+				foreach ($bib->arr as $field) {
+					if (stripos ((string)$field['name'],'880a')) {
+						echo '<br/>';
+						foreach ($field->str as $string) {
+							echo (string) $string . " ";
 						}
 					}
 				}
