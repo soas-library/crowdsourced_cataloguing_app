@@ -59,7 +59,14 @@
 	$xml = new SimpleXMLElement($response); 
 	
 	$content = $xml->content;
-	#$content = simplexml_load_string($content);
+	$content = new SimpleXMLElement($content);
+	
+	foreach($content->getDocNamespaces() as $strPrefix => $strNamespace) {
+		if(strlen($strPrefix)==0) {
+			$strPrefix="a"; //Assign an arbitrary namespace prefix.
+		}
+		$content->registerXPathNamespace($strPrefix,$strNamespace);
+	}
 	
 ?>
 	<form action="crowdsource_submit.php" method="POST">
@@ -67,18 +74,20 @@
 			<legend><strong>Fix Me</strong></legend><br/>
 			<strong>Title: </strong>
 <?php
-
-				#$content = str_replace('xmlns=', 'ns=', $content); 
-				#var_dump($content->xpath('//collection'));
-				print_r($content->asXML());
 				
-				foreach ($content->record->datafield as $datafield) {
+				#echo($content->xpath("///a:datafield[@tag='245']/a:subfield[@code='a']")[0]);
+
+				foreach ($content->xpath("///a:datafield[@tag='245']/a:subfield[@code='a']") as $subfield) {
+					echo (string) $subfield . " ";
+				}
+
+/* 				foreach ($content->record->datafield as $datafield) {
 					if ((string) $datafield['tag'] == '245') {
 						foreach ($datafield->subfield as $subfield) {
 							echo (string) $subfield . " ";
 						}
 					}
-				}
+				} */
 				
 				foreach ($content->record->datafield as $datafield) {
 					if ((string) $datafield['tag'] == '880') {
