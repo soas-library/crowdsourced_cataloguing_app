@@ -58,54 +58,67 @@
 				$xml = new SimpleXMLElement($response); 
 	
 				$content = $xml->content;
-				$content = simplexml_load_string($content);
+				$content = new SimpleXMLElement($content);
+	
+				foreach($content->getDocNamespaces() as $strPrefix => $strNamespace) {
+					if(strlen($strPrefix)==0) {
+						$strPrefix="a"; //Assign an arbitrary namespace prefix.
+					}
+					$content->registerXPathNamespace($strPrefix,$strNamespace);
+				}
 			
 				echo "<h3>Record</h3>";
 			
-				foreach ($content->record->controlfield as $controlfield) {
-					if ((string) $controlfield['tag'] == '001') {
-						echo (string) $controlfield;
-					}
+				foreach ($content->xpath("///a:controlfield[@tag='001']") as $controlfield) {
+					echo (string) $controlfield;
 				}
 				
 				echo "<br/>";
 			
-				foreach ($content->record->datafield as $datafield) {
-					if ((string) $datafield['tag'] == '245') {
-						foreach ($datafield->subfield as $subfield) {
-							echo (string) $subfield . " ";
-						}
-					}
+				foreach ($content->xpath("///a:datafield[@tag='245']/a:subfield[@code!='6']") as $subfield) {
+					echo (string) $subfield . " ";
+				}
+				
+				echo '<br/>';
+				
+				foreach ($content->xpath("///a:datafield[@tag='880'][contains(.,'245')]/a:subfield[@code!='6']") as $subfield) {
+					echo (string) $subfield . " ";
 				}
 				
 				echo "<br/>";
 				
-				foreach ($content->record->datafield as $datafield) {
-					if ((string) $datafield['tag'] == '246') {
-						foreach ($datafield->subfield as $subfield) {
-							echo (string) $subfield . " ";
-						}
-					}
+				foreach ($content->xpath("///a:datafield[@tag='246']/a:subfield[@code!='6']") as $subfield) {
+					echo (string) $subfield . " ";
+				}
+				
+				echo '<br/>';
+				
+				foreach ($content->xpath("///a:datafield[@tag='880'][contains(.,'246')]/a:subfield[@code!='6']") as $subfield) {
+					echo (string) $subfield . " ";
 				}
 				
 				echo "<br/>";
 				
-				foreach ($content->record->datafield as $datafield) {
-					if ((string) $datafield['tag'] == '100') {
-						foreach ($datafield->subfield as $subfield) {
-							echo (string) $subfield . " ";
-						}
-					}
+				foreach ($content->xpath("///a:datafield[@tag='100']/a:subfield[@code!='6']") as $subfield) {
+					echo (string) $subfield . " ";
+				}
+				
+				echo '<br/>';
+				
+				foreach ($content->xpath("///a:datafield[@tag='880'][contains(.,'100')]/a:subfield[@code!='6']") as $subfield) {
+					echo (string) $subfield . " ";
 				}
 				
 				echo "<br/>";
 				
-				foreach ($content->record->datafield as $datafield) {
-					if ((string) $datafield['tag'] == '260' || (string) $datafield['tag'] == '264') {
-						foreach ($datafield->subfield as $subfield) {
-							echo (string) $subfield . " ";
-						}
-					}
+				foreach ($content->xpath("///a:datafield[@tag='260']/a:subfield[@code!='6']|///a:datafield[@tag='264']/a:subfield[@code!='6']") as $subfield) {
+					echo (string) $subfield . " ";
+				}
+				
+				echo '<br/>';
+				
+				foreach ($content->xpath("///a:datafield[@tag='880'][contains(.,'160')]/a:subfield[@code!='6']|///a:datafield[@tag='880'][contains(.,'264')]/a:subfield[@code!='6']") as $subfield) {
+					echo (string) $subfield . " ";
 				}
 				
 				echo "<br/>";
@@ -115,10 +128,8 @@
 
 				<input type="hidden" value="
 			<?php 
-				foreach ($content->record->controlfield as $controlfield) {
-					if ((string) $controlfield['tag'] == '001') {
-						echo (string) $controlfield;
-					}
+				foreach ($content->xpath("///a:controlfield[@tag='001']") as $controlfield) {
+					echo (string) $controlfield;
 				}
 			?>
 				" name="id" />

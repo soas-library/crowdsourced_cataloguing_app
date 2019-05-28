@@ -37,7 +37,7 @@
 		# Turn the API response into useful XML
 		$xml = new SimpleXMLElement($response); 
 
-		$random = rand(0,4061);
+		$random = rand(0,3605);
 	
 		$bib_id = $xml->result->doc[$random]->arr->str;
 	}
@@ -75,32 +75,14 @@
 			<strong>Title: </strong>
 <?php
 				
-				#echo($content->xpath("///a:datafield[@tag='245']/a:subfield[@code='a']")[0]);
-
-				foreach ($content->xpath("///a:datafield[@tag='245']/a:subfield[@code='a']") as $subfield) {
+				foreach ($content->xpath("///a:datafield[@tag='245']/a:subfield[@code!='6']") as $subfield) {
 					echo (string) $subfield . " ";
 				}
-
-/* 				foreach ($content->record->datafield as $datafield) {
-					if ((string) $datafield['tag'] == '245') {
-						foreach ($datafield->subfield as $subfield) {
-							echo (string) $subfield . " ";
-						}
-					}
-				} */
 				
-				foreach ($content->record->datafield as $datafield) {
-					if ((string) $datafield['tag'] == '880') {
-						foreach ($datafield->subfield as $subfield) {
-							#print_r($subfield);
-
-							print_r(array_values($subfield));
-							
-							if (array_search('245-01',$subfield)) {
-								print_r ($subfield);
-							}
-						}
-					}
+				echo '<br/>';
+				
+				foreach ($content->xpath("///a:datafield[@tag='880'][contains(.,'245')]/a:subfield[@code!='6']") as $subfield) {
+					echo (string) $subfield . " ";
 				}
 
 ?>
@@ -110,12 +92,14 @@
 			<strong>Alternative title: </strong>
 <?php
 
-				foreach ($content->record->datafield as $datafield) {
-					if ((string) $datafield['tag'] == '246') {
-						foreach ($datafield->subfield as $subfield) {
-							echo (string) $subfield . " ";
-						}
-					}
+				foreach ($content->xpath("///a:datafield[@tag='246']/a:subfield[@code!='6']") as $subfield) {
+					echo (string) $subfield . " ";
+				}
+				
+				echo '<br/>';
+				
+				foreach ($content->xpath("///a:datafield[@tag='880'][contains(.,'246')]/a:subfield[@code!='6']") as $subfield) {
+					echo (string) $subfield . " ";
 				}
 
 ?>
@@ -125,12 +109,14 @@
 			<strong>Main author: </strong>
 <?php
 
-				foreach ($content->record->datafield as $datafield) {
-					if ((string) $datafield['tag'] == '100') {
-						foreach ($datafield->subfield as $subfield) {
-							echo (string) $subfield . " ";
-						}
-					}
+				foreach ($content->xpath("///a:datafield[@tag='100']/a:subfield[@code!='6']") as $subfield) {
+					echo (string) $subfield . " ";
+				}
+				
+				echo '<br/>';
+				
+				foreach ($content->xpath("///a:datafield[@tag='880'][contains(.,'100')]/a:subfield[@code!='6']") as $subfield) {
+					echo (string) $subfield . " ";
 				}
 
 ?>
@@ -140,12 +126,14 @@
 			<strong>Publication details: </strong>
 <?php	
 
-				foreach ($content->record->datafield as $datafield) {
-					if ((string) $datafield['tag'] == '260' || (string) $datafield['tag'] == '264') {
-						foreach ($datafield->subfield as $subfield) {
-							echo (string) $subfield . " ";
-						}
-					}
+				foreach ($content->xpath("///a:datafield[@tag='260']/a:subfield[@code!='6']|///a:datafield[@tag='264']/a:subfield[@code!='6']") as $subfield) {
+					echo (string) $subfield . " ";
+				}
+				
+				echo '<br/>';
+				
+				foreach ($content->xpath("///a:datafield[@tag='880'][contains(.,'160')]/a:subfield[@code!='6']|///a:datafield[@tag='880'][contains(.,'264')]/a:subfield[@code!='6']") as $subfield) {
+					echo (string) $subfield . " ";
 				}
 
 ?>
@@ -158,11 +146,11 @@
 			
 			<input type="hidden" value="
 			<?php 
-				foreach ($content->record->controlfield as $controlfield) {
-					if ((string) $controlfield['tag'] == '001') {
-						echo (string) $controlfield;
-					}
+			
+				foreach ($content->xpath("///a:controlfield[@tag='001']") as $controlfield) {
+					echo (string) $controlfield;
 				}
+				
 			?>
 			" name="id" />
 			
