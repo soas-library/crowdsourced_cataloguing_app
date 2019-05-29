@@ -100,6 +100,9 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
+				<div class="logo-div">
+					<a href="/crowdsource_v2"><img src="images/soas-logo-transparent.png" alt="SOAS Library" class="logo"></a>
+				</div>
 				<form class="login100-form validate-form p-l-55 p-r-55 p-t-150" action="crowdsource_submit.php" method="POST">
 					<span class="login100-form-title">
 						Help us learn Bengali
@@ -107,7 +110,7 @@
 
 					<div class="content100">
 						<div class="wrap-header100">
-							<strong>Title:</strong>
+							<strong>Title</strong>
 						</div>
 						<div class="wrap-content100 p-t-05 p-b-10">
 <?php
@@ -138,7 +141,7 @@
 					
 					<div class="content100 p-t-15">
 						<div class="wrap-header100">
-							<strong>Alternative title:</strong>
+							<strong>Alternative title</strong>
 						</div>
 						<div class="wrap-content100 p-t-05 p-b-10">
 <?php
@@ -172,7 +175,7 @@
 					
 					<div class="content100 p-t-15">
 						<div class="wrap-header100">
-							<strong>Main author:</strong>
+							<strong>Main author</strong>
 						</div>
 						<div class="wrap-content100 p-t-05 p-b-10">
 <?php
@@ -206,7 +209,7 @@
 					
 					<div class="content100 p-t-15">
 						<div class="wrap-header100">
-							<strong>Publication details:</strong>
+							<strong>Publication details</strong>
 						</div>
 						<div class="wrap-content100 p-t-05 p-b-10">
 <?php
@@ -233,9 +236,9 @@
 					endif;
 ?>
 
-					<div class="content100 p-t-15">
+					<div class="content100 p-t-60">
 						<div class="wrap-header100">
-							<strong>Email address:</strong>
+							<strong>Email address</strong>
 						</div>
 						<div class="wrap-input100 validate-input m-b-16" data-validate="Email address">
 							<input class="input100" type="text" name="email" placeholder="Insert your email address here">
@@ -245,7 +248,7 @@
 
 					<div class="content100 p-t-15">
 						<div class="wrap-header100">
-							<strong>Comment:</strong>
+							<strong>Comment</strong>
 						</div>
 						<div class="wrap-input100 m-b-16" data-validate="Comments">
 							<textarea class='textarea100' type="text" name="comment" ></textarea>
