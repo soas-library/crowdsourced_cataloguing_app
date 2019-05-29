@@ -68,7 +68,7 @@
 					
 					<div class="container-login100-form-btn">
 						<a href="crowdsource_edit.php" class="button">
-							edit a random book
+							pick a random book
 						</a>
 					</div>
 				</div>
