@@ -1,7 +1,7 @@
 <?php
 # @name: crowdsource_submit.php
-# @version: 0.1
-# @creation_date: 2019-03-08
+# @version: 0.2
+# @creation_date: 2019-05-29
 # @license: The MIT License <https://opensource.org/licenses/MIT>
 # @author: Simon Bowie <sb174@soas.ac.uk>
 # @purpose: A prototype of a web application to crowdsource cataloguing for SOAS' bibliographic records
@@ -24,6 +24,7 @@
 	$alt_title = test_input($_POST["alt_title"]);
 	$author = test_input($_POST["author"]);
 	$publication = test_input($_POST["publication"]);
+	$email = test_input($_POST["email"]);
 	$comment = test_input($_POST["comment"]);
 	
 ?>
@@ -66,6 +67,7 @@ $values = [
 			$alt_title,
 			$author,
 			$publication,
+			$email,
 			$comment,
 			date('c')
 		]
