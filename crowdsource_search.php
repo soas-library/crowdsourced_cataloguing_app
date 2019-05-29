@@ -67,7 +67,15 @@
 	$xml = new SimpleXMLElement($response); 
 	
 	if ($xml->result->attributes()->numFound == '0'){
-		echo 'No results found';
+?>
+					<div class="wrap-result100">
+						<div class="wrap-header100">
+							<div class="wrap-content100 p-t-05 p-b-50">
+							No results found
+							</div>
+						</div>
+					</div>
+<?php
 	}
 	else {
 		// foreach ($xml->result->doc as $result) {
@@ -192,6 +200,32 @@
 	}
 ?>
 			</div>
+			
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+<!--===============================================================================================-->
+	<script src="https://www.google.com/recaptcha/api.js?render=6Le_IKYUAAAAAImzZSWxuwXJIKFkHEh9s3Am0b1q"></script>
+	<script>
+		grecaptcha.ready(function() {
+			grecaptcha.execute('6Le_IKYUAAAAAImzZSWxuwXJIKFkHEh9s3Am0b1q', {action: 'crowdsource_submit.php'}).then(function(token) {
+			...
+			});
+	});
+	</script>
 
 </body>
 </html>

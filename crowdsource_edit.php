@@ -129,7 +129,7 @@
 						</div>
 					
 						<div class="wrap-input100 m-b-16" data-validate="Title">
-							<input class="input100" type="text" name="title" placeholder="Insert your suggestion here">
+							<input class="input100" type="text" name="title" placeholder="Enter your suggestion here">
 							<span class="focus-input100"></span>
 						</div>
 					</div>
@@ -160,7 +160,7 @@
 						</div>
 					
 						<div class="wrap-input100 m-b-16" data-validate="Alternative title">
-							<input class="input100" type="text" name="alt_title" placeholder="Insert your suggestion here">
+							<input class="input100" type="text" name="alt_title" placeholder="Enter your suggestion here">
 							<span class="focus-input100"></span>
 						</div>
 					</div>
@@ -194,7 +194,7 @@
 						</div>
 					
 						<div class="wrap-input100 m-b-16" data-validate="Author">
-							<input class="input100" type="text" name="author" placeholder="Insert your suggestion here">
+							<input class="input100" type="text" name="author" placeholder="Enter your suggestion here">
 							<span class="focus-input100"></span>
 						</div>
 					</div>
@@ -228,7 +228,7 @@
 						</div>
 					
 						<div class="wrap-input100 m-b-16" data-validate="Publication details">
-							<input class="input100" type="text" name="publication" placeholder="Insert your suggestion here">
+							<input class="input100" type="text" name="publication" placeholder="Enter your suggestion here">
 							<span class="focus-input100"></span>
 						</div>
 					</div>
@@ -241,7 +241,7 @@
 							<strong>Email address</strong>
 						</div>
 						<div class="wrap-input100 validate-input m-b-16" data-validate="Email address">
-							<input class="input100" type="text" name="email" placeholder="Insert your email address here">
+							<input class="input100" type="text" name="email" placeholder="Enter your email address here">
 							<span class="focus-input100"></span>
 						</div>
 					</div>
@@ -265,7 +265,7 @@
 				
 ?>
 			" name="id" />
-
+ 
 					<div class="container-login100-form-btn p-b-50">
 						<button class="login100-form-btn">
 							Submit
@@ -294,6 +294,15 @@
 	<script src="vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
+<!--===============================================================================================-->
+	<script src="https://www.google.com/recaptcha/api.js?render=6Le_IKYUAAAAAImzZSWxuwXJIKFkHEh9s3Am0b1q"></script>
+	<script>
+		grecaptcha.ready(function() {
+			grecaptcha.execute('6Le_IKYUAAAAAImzZSWxuwXJIKFkHEh9s3Am0b1q', {action: 'crowdsource_submit.php'}).then(function(token) {
+			...
+			});
+	});
+	</script>
 
 </body>
 </html>

@@ -10,6 +10,7 @@
 	text-align: center;
 	background-color: #e7e0d2;
 	padding:10px;
+	padding-top:20px;
 }
 
 .logo-transp {
@@ -317,7 +318,7 @@ iframe {
 .input100 {
   font-family: SourceSansPro-Bold;
   font-size: 15px;
-  color: #1b3815;
+  color: #63666a;
   line-height: 1.2;
 
   position: relative;
