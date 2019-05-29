@@ -72,7 +72,7 @@ $range = 'submissions';
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<div class="logo-div">
-					<a href="/crowdsource_v2"><img src="images/soas-logo-transparent.png" alt="SOAS Library" class="logo"></a>
+					<a href="index.php"><img src="images/soas-logo-transparent.png" alt="SOAS Library" class="logo"></a>
 				</div>
 				<div class="login100-form p-l-55 p-r-55 p-t-150 p-b-50">
 					<span class="login100-form-title">
@@ -99,7 +99,7 @@ $range = 'submissions';
 					</div>
 				</div>
 				<span class="flex-col-c p-b-40">
-					<a href="/crowdsource_v2/crowdsource_about.php">About the project</a>
+					<a href="crowdsource_about.php">About the project</a>
 				</span>
 			</div>
 		</div>
