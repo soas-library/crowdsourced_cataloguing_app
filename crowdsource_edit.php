@@ -217,7 +217,7 @@
 				
 							echo '<br/>';
 				
-							foreach ($content->xpath("///a:datafield[@tag='880'][contains(.,'160')]/a:subfield[@code!='6']|///a:datafield[@tag='880'][contains(.,'264')]/a:subfield[@code!='6']") as $subfield) {
+							foreach ($content->xpath("///a:datafield[@tag='880'][contains(.,'260')]/a:subfield[@code!='6']|///a:datafield[@tag='880'][contains(.,'264')]/a:subfield[@code!='6']") as $subfield) {
 								echo (string) $subfield . " ";
 							}
 
