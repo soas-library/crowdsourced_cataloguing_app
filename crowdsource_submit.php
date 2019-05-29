@@ -58,7 +58,7 @@ $client->setAuthConfig(__DIR__ . '/crowdsource-ecca04407a4e.json');
 $sheets = new \Google_Service_Sheets($client);
 
 $spreadsheetId = '1dM-YM2-qxIy_CJ95SknO02X330j91PP5d3lFlYiCd_Q';
-$range = 'Sheet1';
+$range = 'submissions';
 $valueInputOption = 'USER_ENTERED';
 
 $values = [

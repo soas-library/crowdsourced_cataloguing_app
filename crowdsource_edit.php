@@ -272,7 +272,9 @@
 						</button>
 					</div>
 				</form>
-			
+				<span class="flex-col-c p-b-40">
+					<a href="/crowdsource_v2/crowdsource_about.php">About the project</a>
+				</span>
 			</div>
 		</div>
 	</div>

@@ -1,7 +1,7 @@
 <?php
-# @name: crowdsource_thanks.php
-# @version: 0.1
-# @creation_date: 2019-05-29
+# @name: index.php
+# @version: 0.2
+# @creation_date: 2019-05-23
 # @license: The MIT License <https://opensource.org/licenses/MIT>
 # @author: Simon Bowie <sb174@soas.ac.uk>
 # @purpose: A prototype of a web application to crowdsource cataloguing for SOAS' bibliographic records
@@ -35,7 +35,44 @@
 <!--===============================================================================================-->
 </head>
 <body>
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="logo-div">
+					<a href="/crowdsource_v2"><img src="images/soas-logo-transparent.png" alt="SOAS Library" class="logo"></a>
+				</div>
+				<form class="login100-form validate-form p-l-55 p-r-55 p-t-175" action="crowdsource_search.php" method="POST">
+					<span class="login100-form-title">
+						Help us learn Bengali
+					</span>
 
+					<div class="wrap-input100 validate-input m-b-16" data-validate="Search for a book">
+						<input class="input100" type="text" name="search" placeholder="Search for a book">
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							Search
+						</button>
+					</div>
+				</form>
+				
+				<div class="wrap-input100 p-b-30 p-l-55 p-r-55">
+					<div class="flex-col-c p-t-50 p-b-20">
+						<span class="txt3">
+							OR
+						</span>
+					</div>
+					
+					<div class="container-login100-form-btn">
+						<a href="crowdsource_edit.php" class="button">
+							edit a random book
+						</a>
+					</div>
+				</div>
+				
 <?php
 require __DIR__ . '/vendor/autoload.php';
 
@@ -67,44 +104,26 @@ $spreadsheetId = '1dM-YM2-qxIy_CJ95SknO02X330j91PP5d3lFlYiCd_Q';
 $range = 'submissions';
 
 ?>
-
-	<div class="limiter">
-		<div class="container-login100">
-			<div class="wrap-login100">
-				<div class="logo-div">
-					<a href="/crowdsource_v2"><img src="images/soas-logo-transparent.png" alt="SOAS Library" class="logo"></a>
-				</div>
-				<div class="login100-form p-l-55 p-r-55 p-t-150 p-b-50">
-					<span class="login100-form-title">
-						Help us learn Bengali
-					</span>
-
-					<div class="content100">
-						<div class="wrap-content100">
-							Thank you for contributing to SOAS Library's Bengali cataloguing enhancement project.
-						</div>
-						
-						<div class="flex-col-c p-t-50">
-							<span class="txt1 p-b-9">
-								We have received
-							
+				
+				<div class="flex-col-c p-t-40 p-b-20">
+					<span class="txt1 p-b-9">
+						We have received
 <?php
 						$result = $sheets->spreadsheets_values->get($spreadsheetId, $range);
 						$numRows = ($result->getValues() != null ? count($result->getValues()) : 0) - 1;
 						printf("%d", $numRows);
 ?>
-								 contributions so far.
-							</span>
-						</div>
-					</div>
+						 contributions so far.
+					</span>
 				</div>
 				<span class="flex-col-c p-b-40">
-					<a href="/crowdsource_v2/crowdsource_about.php">About the project</a>
+						<a href="/crowdsource_v2/crowdsource_about.php">About the project</a>
 				</span>
 			</div>
 		</div>
 	</div>
-
+	
+	
 <!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->

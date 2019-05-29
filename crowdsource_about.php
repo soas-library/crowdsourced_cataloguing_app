@@ -1,5 +1,5 @@
 <?php
-# @name: crowdsource_thanks.php
+# @name: crowdsource_about.php
 # @version: 0.1
 # @creation_date: 2019-05-29
 # @license: The MIT License <https://opensource.org/licenses/MIT>
@@ -64,7 +64,7 @@ $client->setAuthConfig(__DIR__ . '/crowdsource-ecca04407a4e.json');
 $sheets = new \Google_Service_Sheets($client);
 
 $spreadsheetId = '1dM-YM2-qxIy_CJ95SknO02X330j91PP5d3lFlYiCd_Q';
-$range = 'submissions';
+$range = 'about!A3';
 
 ?>
 
@@ -81,26 +81,14 @@ $range = 'submissions';
 
 					<div class="content100">
 						<div class="wrap-content100">
-							Thank you for contributing to SOAS Library's Bengali cataloguing enhancement project.
-						</div>
-						
-						<div class="flex-col-c p-t-50">
-							<span class="txt1 p-b-9">
-								We have received
-							
 <?php
-						$result = $sheets->spreadsheets_values->get($spreadsheetId, $range);
-						$numRows = ($result->getValues() != null ? count($result->getValues()) : 0) - 1;
-						printf("%d", $numRows);
-?>
-								 contributions so far.
-							</span>
+							$result = $sheets->spreadsheets_values->get($spreadsheetId, $range);
+							
+							echo $result['values'][0][0];
+?>							
 						</div>
 					</div>
 				</div>
-				<span class="flex-col-c p-b-40">
-					<a href="/crowdsource_v2/crowdsource_about.php">About the project</a>
-				</span>
 			</div>
 		</div>
 	</div>
