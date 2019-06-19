@@ -238,7 +238,7 @@
 
 					<div class="content100 p-t-60">
 						<div class="wrap-header100">
-							<strong>Email address</strong>
+							<strong>Email address (required)</strong>
 						</div>
 						<div class="wrap-input100 validate-input m-b-16" data-validate="Email address">
 							<input class="input100" type="text" name="email" placeholder="Enter your email address here">
