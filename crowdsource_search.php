@@ -51,7 +51,7 @@
 <?php
 	$search = urlencode($_POST["search"]);
 
-	$solrurl = 'http://james.lis.soas.ac.uk:8983/solr/bib/select?fl=bibIdentifier&fq=DocType:bibliographic&fq=Language_search:Bengali&indent=on&q=Title_search:' . $search . '%20OR%20Author_search:' . $search . '%20OR%20Publisher_search:' . $search . '%20OR%20PublicationDate_search:' . $search . '%20OR%20PublicationPlace_search:' . $search . '%20OR%20LocalId_display:' . $search . '%20OR%20ItemBarcode_search:' . $search . '&rows=5000&wt=xml';
+	$solrurl = 'http://james.lis.soas.ac.uk:8983/solr/bib/select?fl=bibIdentifier&fq=DocType:bibliographic&fq=Language_search:Bengali&indent=on&q=Title_search:' . $search . '%20OR%20Author_search:' . $search . '%20OR%20Publisher_search:' . $search . '%20OR%20PublicationDate_search:' . $search . '%20OR%20PublicationPlace_search:' . $search . '%20OR%20LocalId_display:' . $search . '%20OR%20ItemBarcode_search:' . $search . '%20OR%20ISBN_search:' . $search . '&rows=5000&wt=xml';
 
 	# Perform Curl request on the Solr API
 	$ch = curl_init();
