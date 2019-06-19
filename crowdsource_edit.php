@@ -108,6 +108,18 @@
 						Help us learn Bengali
 					</span>
 
+<?php
+					if (empty($_POST)):
+?>
+						<div class="container-login100-form-btn p-b-50">
+							<a href="crowdsource_edit.php" class="button">
+								pick another book
+							</a>
+						</div>
+<?php
+					endif;
+?>					
+
 					<div class="content100">
 						<div class="wrap-header100">
 							<strong>Title</strong>
