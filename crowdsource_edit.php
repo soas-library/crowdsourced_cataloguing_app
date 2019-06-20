@@ -33,10 +33,10 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/soas.css">
 <!--===============================================================================================-->
-	<script src="https://www.google.com/recaptcha/api.js?render=6Le_IKYUAAAAAImzZSWxuwXJIKFkHEh9s3Am0b1q"></script>
+	<script src="https://www.google.com/recaptcha/api.js?render=6LcP5qkUAAAAAOoixJM9kyWR2lLtug2FclBt1ueo"></script>
     <script>
         grecaptcha.ready(function () {
-            grecaptcha.execute('6Le_IKYUAAAAAImzZSWxuwXJIKFkHEh9s3Am0b1q', { action: 'edit' }).then(function (token) {
+            grecaptcha.execute('6LcP5qkUAAAAAOoixJM9kyWR2lLtug2FclBt1ueo', { action: 'edit' }).then(function (token) {
                 var recaptchaResponse = document.getElementById('recaptchaResponse');
                 recaptchaResponse.value = token;
             });
