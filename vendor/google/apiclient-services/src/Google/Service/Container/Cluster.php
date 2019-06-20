@@ -27,8 +27,11 @@ class Google_Service_Container_Cluster extends Google_Collection
   public $currentMasterVersion;
   public $currentNodeCount;
   public $currentNodeVersion;
+  protected $defaultMaxPodsConstraintType = 'Google_Service_Container_MaxPodsConstraint';
+  protected $defaultMaxPodsConstraintDataType = '';
   public $description;
   public $enableKubernetesAlpha;
+  public $enableTpu;
   public $endpoint;
   public $expireTime;
   public $initialClusterVersion;
@@ -63,11 +66,14 @@ class Google_Service_Container_Cluster extends Google_Collection
   protected $privateClusterConfigType = 'Google_Service_Container_PrivateClusterConfig';
   protected $privateClusterConfigDataType = '';
   public $resourceLabels;
+  protected $resourceUsageExportConfigType = 'Google_Service_Container_ResourceUsageExportConfig';
+  protected $resourceUsageExportConfigDataType = '';
   public $selfLink;
   public $servicesIpv4Cidr;
   public $status;
   public $statusMessage;
   public $subnetwork;
+  public $tpuIpv4CidrBlock;
   public $zone;
 
   /**
@@ -138,6 +144,20 @@ class Google_Service_Container_Cluster extends Google_Collection
   {
     return $this->currentNodeVersion;
   }
+  /**
+   * @param Google_Service_Container_MaxPodsConstraint
+   */
+  public function setDefaultMaxPodsConstraint(Google_Service_Container_MaxPodsConstraint $defaultMaxPodsConstraint)
+  {
+    $this->defaultMaxPodsConstraint = $defaultMaxPodsConstraint;
+  }
+  /**
+   * @return Google_Service_Container_MaxPodsConstraint
+   */
+  public function getDefaultMaxPodsConstraint()
+  {
+    return $this->defaultMaxPodsConstraint;
+  }
   public function setDescription($description)
   {
     $this->description = $description;
@@ -153,6 +173,14 @@ class Google_Service_Container_Cluster extends Google_Collection
   public function getEnableKubernetesAlpha()
   {
     return $this->enableKubernetesAlpha;
+  }
+  public function setEnableTpu($enableTpu)
+  {
+    $this->enableTpu = $enableTpu;
+  }
+  public function getEnableTpu()
+  {
+    return $this->enableTpu;
   }
   public function setEndpoint($endpoint)
   {
@@ -406,6 +434,20 @@ class Google_Service_Container_Cluster extends Google_Collection
   {
     return $this->resourceLabels;
   }
+  /**
+   * @param Google_Service_Container_ResourceUsageExportConfig
+   */
+  public function setResourceUsageExportConfig(Google_Service_Container_ResourceUsageExportConfig $resourceUsageExportConfig)
+  {
+    $this->resourceUsageExportConfig = $resourceUsageExportConfig;
+  }
+  /**
+   * @return Google_Service_Container_ResourceUsageExportConfig
+   */
+  public function getResourceUsageExportConfig()
+  {
+    return $this->resourceUsageExportConfig;
+  }
   public function setSelfLink($selfLink)
   {
     $this->selfLink = $selfLink;
@@ -445,6 +487,14 @@ class Google_Service_Container_Cluster extends Google_Collection
   public function getSubnetwork()
   {
     return $this->subnetwork;
+  }
+  public function setTpuIpv4CidrBlock($tpuIpv4CidrBlock)
+  {
+    $this->tpuIpv4CidrBlock = $tpuIpv4CidrBlock;
+  }
+  public function getTpuIpv4CidrBlock()
+  {
+    return $this->tpuIpv4CidrBlock;
   }
   public function setZone($zone)
   {

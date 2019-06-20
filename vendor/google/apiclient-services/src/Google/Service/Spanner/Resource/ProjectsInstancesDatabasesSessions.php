@@ -110,6 +110,36 @@ class Google_Service_Spanner_Resource_ProjectsInstancesDatabasesSessions extends
     return $this->call('delete', array($params), "Google_Service_Spanner_SpannerEmpty");
   }
   /**
+   * Executes a batch of SQL DML statements. This method allows many statements to
+   * be run with lower latency than submitting them sequentially with ExecuteSql.
+   *
+   * Statements are executed in order, sequentially. ExecuteBatchDmlResponse will
+   * contain a ResultSet for each DML statement that has successfully executed. If
+   * a statement fails, its error status will be returned as part of the
+   * ExecuteBatchDmlResponse. Execution will stop at the first failed statement;
+   * the remaining statements will not run.
+   *
+   * ExecuteBatchDml is expected to return an OK status with a response even if
+   * there was an error while processing one of the DML statements. Clients must
+   * inspect response.status to determine if there were any errors while
+   * processing the request.
+   *
+   * See more details in ExecuteBatchDmlRequest and ExecuteBatchDmlResponse.
+   * (sessions.executeBatchDml)
+   *
+   * @param string $session Required. The session in which the DML statements
+   * should be performed.
+   * @param Google_Service_Spanner_ExecuteBatchDmlRequest $postBody
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_Spanner_ExecuteBatchDmlResponse
+   */
+  public function executeBatchDml($session, Google_Service_Spanner_ExecuteBatchDmlRequest $postBody, $optParams = array())
+  {
+    $params = array('session' => $session, 'postBody' => $postBody);
+    $params = array_merge($params, $optParams);
+    return $this->call('executeBatchDml', array($params), "Google_Service_Spanner_ExecuteBatchDmlResponse");
+  }
+  /**
    * Executes an SQL statement, returning all results in a single reply. This
    * method cannot be used to return a result set larger than 10 MiB; if the query
    * yields more data than that, the query fails with a `FAILED_PRECONDITION`

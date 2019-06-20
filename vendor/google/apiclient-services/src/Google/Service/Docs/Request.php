@@ -35,6 +35,12 @@ class Google_Service_Docs_Request extends Google_Model
   protected $deleteTableRowDataType = '';
   protected $insertInlineImageType = 'Google_Service_Docs_InsertInlineImageRequest';
   protected $insertInlineImageDataType = '';
+  protected $insertPageBreakType = 'Google_Service_Docs_InsertPageBreakRequest';
+  protected $insertPageBreakDataType = '';
+  protected $insertTableType = 'Google_Service_Docs_InsertTableRequest';
+  protected $insertTableDataType = '';
+  protected $insertTableColumnType = 'Google_Service_Docs_InsertTableColumnRequest';
+  protected $insertTableColumnDataType = '';
   protected $insertTableRowType = 'Google_Service_Docs_InsertTableRowRequest';
   protected $insertTableRowDataType = '';
   protected $insertTextType = 'Google_Service_Docs_InsertTextRequest';
@@ -43,6 +49,10 @@ class Google_Service_Docs_Request extends Google_Model
   protected $replaceAllTextDataType = '';
   protected $updateParagraphStyleType = 'Google_Service_Docs_UpdateParagraphStyleRequest';
   protected $updateParagraphStyleDataType = '';
+  protected $updateTableColumnPropertiesType = 'Google_Service_Docs_UpdateTableColumnPropertiesRequest';
+  protected $updateTableColumnPropertiesDataType = '';
+  protected $updateTableRowStyleType = 'Google_Service_Docs_UpdateTableRowStyleRequest';
+  protected $updateTableRowStyleDataType = '';
   protected $updateTextStyleType = 'Google_Service_Docs_UpdateTextStyleRequest';
   protected $updateTextStyleDataType = '';
 
@@ -173,6 +183,48 @@ class Google_Service_Docs_Request extends Google_Model
     return $this->insertInlineImage;
   }
   /**
+   * @param Google_Service_Docs_InsertPageBreakRequest
+   */
+  public function setInsertPageBreak(Google_Service_Docs_InsertPageBreakRequest $insertPageBreak)
+  {
+    $this->insertPageBreak = $insertPageBreak;
+  }
+  /**
+   * @return Google_Service_Docs_InsertPageBreakRequest
+   */
+  public function getInsertPageBreak()
+  {
+    return $this->insertPageBreak;
+  }
+  /**
+   * @param Google_Service_Docs_InsertTableRequest
+   */
+  public function setInsertTable(Google_Service_Docs_InsertTableRequest $insertTable)
+  {
+    $this->insertTable = $insertTable;
+  }
+  /**
+   * @return Google_Service_Docs_InsertTableRequest
+   */
+  public function getInsertTable()
+  {
+    return $this->insertTable;
+  }
+  /**
+   * @param Google_Service_Docs_InsertTableColumnRequest
+   */
+  public function setInsertTableColumn(Google_Service_Docs_InsertTableColumnRequest $insertTableColumn)
+  {
+    $this->insertTableColumn = $insertTableColumn;
+  }
+  /**
+   * @return Google_Service_Docs_InsertTableColumnRequest
+   */
+  public function getInsertTableColumn()
+  {
+    return $this->insertTableColumn;
+  }
+  /**
    * @param Google_Service_Docs_InsertTableRowRequest
    */
   public function setInsertTableRow(Google_Service_Docs_InsertTableRowRequest $insertTableRow)
@@ -227,6 +279,34 @@ class Google_Service_Docs_Request extends Google_Model
   public function getUpdateParagraphStyle()
   {
     return $this->updateParagraphStyle;
+  }
+  /**
+   * @param Google_Service_Docs_UpdateTableColumnPropertiesRequest
+   */
+  public function setUpdateTableColumnProperties(Google_Service_Docs_UpdateTableColumnPropertiesRequest $updateTableColumnProperties)
+  {
+    $this->updateTableColumnProperties = $updateTableColumnProperties;
+  }
+  /**
+   * @return Google_Service_Docs_UpdateTableColumnPropertiesRequest
+   */
+  public function getUpdateTableColumnProperties()
+  {
+    return $this->updateTableColumnProperties;
+  }
+  /**
+   * @param Google_Service_Docs_UpdateTableRowStyleRequest
+   */
+  public function setUpdateTableRowStyle(Google_Service_Docs_UpdateTableRowStyleRequest $updateTableRowStyle)
+  {
+    $this->updateTableRowStyle = $updateTableRowStyle;
+  }
+  /**
+   * @return Google_Service_Docs_UpdateTableRowStyleRequest
+   */
+  public function getUpdateTableRowStyle()
+  {
+    return $this->updateTableRowStyle;
   }
   /**
    * @param Google_Service_Docs_UpdateTextStyleRequest

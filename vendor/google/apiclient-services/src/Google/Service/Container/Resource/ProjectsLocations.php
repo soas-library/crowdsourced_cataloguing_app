@@ -26,7 +26,7 @@
 class Google_Service_Container_Resource_ProjectsLocations extends Google_Service_Resource
 {
   /**
-   * Returns configuration info about the Kubernetes Engine service.
+   * Returns configuration info about the Google Kubernetes Engine service.
    * (locations.getServerConfig)
    *
    * @param string $name The name (project and location) of the server config to

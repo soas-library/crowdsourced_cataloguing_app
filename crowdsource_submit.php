@@ -9,79 +9,98 @@
 
 <?php
 
-	// clean up all inputted data
-    function test_input($data) {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
-	
-	// define variables and set to empty values
-	$id = $title = $alt_title = $author = $publication = $comment = "";
-	
-	$id = $_POST["id"];
-	$title = test_input($_POST["title"]);
-	$alt_title = test_input($_POST["alt_title"]);
-	$author = test_input($_POST["author"]);
-	$publication = test_input($_POST["publication"]);
-	$email = test_input($_POST["email"]);
-	$comment = test_input($_POST["comment"]);
-	
-?>
-
-<?php
 require __DIR__ . '/vendor/autoload.php';
 
-/*
- * We need to get a Google_Client object first to handle auth and api calls, etc.
- */
-$client = new \Google_Client();
-$client->setApplicationName('crowdsource');
-$client->setScopes([\Google_Service_Sheets::SPREADSHEETS]);
-$client->setAccessType('offline');
+	// clean up all inputted data
+	function test_input($data) {
+		$data = trim($data);
+		$data = stripslashes($data);
+		$data = htmlspecialchars($data);
+		return $data;
+	}
+	
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])){
+	
+    // Build POST request:
+    $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
+    $recaptcha_secret = '6Le_IKYUAAAAAAf-yh0nFRUCfWm9-kVHFdorzDQb';
+    $recaptcha_response = $_POST['recaptcha_response'];
 
-/*
- * The JSON auth file can be provided to the Google Client in two ways, one is as a string which is assumed to be the
- * path to the json file. This is a nice way to keep the creds out of the environment.
- *
- * The second option is as an array. For this example I'll pull the JSON from an environment variable, decode it, and
- * pass along.
- */
-#$jsonAuth = getenv('JSON_AUTH');
-#$client->setAuthConfig(json_decode($jsonAuth, true));
-$client->setAuthConfig(__DIR__ . '/crowdsource-ecca04407a4e.json');
+    // Make and decode POST request:
+    $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
+    $recaptcha = json_decode($recaptcha);
 
-/*
- * With the Google_Client we can get a Google_Service_Sheets service object to interact with sheets
- */
-$sheets = new \Google_Service_Sheets($client);
+    // Take action based on the score returned:
+    if ($recaptcha->score >= 0.5) {
+        // Verified
+		
+		// define variables and set to empty values
+		$id = $title = $alt_title = $author = $publication = $comment = "";
+	
+		$id = $_POST["id"];
+		$title = test_input($_POST["title"]);
+		$alt_title = test_input($_POST["alt_title"]);
+		$author = test_input($_POST["author"]);
+		$publication = test_input($_POST["publication"]);
+		$email = test_input($_POST["email"]);
+		$comment = test_input($_POST["comment"]);
 
-$spreadsheetId = '1dM-YM2-qxIy_CJ95SknO02X330j91PP5d3lFlYiCd_Q';
-$range = 'submissions';
-$valueInputOption = 'USER_ENTERED';
+		/*
+		* We need to get a Google_Client object first to handle auth and api calls, etc.
+		*/
+		$client = new \Google_Client();
+		$client->setApplicationName('crowdsource');
+		$client->setScopes([\Google_Service_Sheets::SPREADSHEETS]);
+		$client->setAccessType('offline');
 
-$values = [
-		[
-			$id,
-			$title,
-			$alt_title,
-			$author,
-			$publication,
-			$email,
-			$comment,
-			date('c')
-		]
-];
+		/*
+		* The JSON auth file can be provided to the Google Client in two ways, one is as a string which is assumed to be the
+		* path to the json file. This is a nice way to keep the creds out of the environment.
+		*
+		* The second option is as an array. For this example I'll pull the JSON from an environment variable, decode it, and
+		* pass along.
+		*/
+		#$jsonAuth = getenv('JSON_AUTH');
+		#$client->setAuthConfig(json_decode($jsonAuth, true));
+		$client->setAuthConfig(__DIR__ . '/crowdsource-ecca04407a4e.json');
 
-$body = new \Google_Service_Sheets_ValueRange([
-    'values' => $values
-]);
-$params = [
-    'valueInputOption' => $valueInputOption
-];
-$result = $sheets->spreadsheets_values->append($spreadsheetId, $range, $body, $params);
+		/*
+		* With the Google_Client we can get a Google_Service_Sheets service object to interact with sheets
+		*/
+		$sheets = new \Google_Service_Sheets($client);
 
-header('Location: crowdsource_thanks.php');
+		$spreadsheetId = '1dM-YM2-qxIy_CJ95SknO02X330j91PP5d3lFlYiCd_Q';
+		$range = 'submissions';
+		$valueInputOption = 'USER_ENTERED';
+
+		$values = [
+				[
+					$id,
+					$title,
+					$alt_title,
+					$author,
+					$publication,
+					$email,
+					$comment,
+					date('c')
+				]
+		];
+
+		$body = new \Google_Service_Sheets_ValueRange([
+			'values' => $values
+		]);
+		$params = [
+			'valueInputOption' => $valueInputOption
+		];
+		$result = $sheets->spreadsheets_values->append($spreadsheetId, $range, $body, $params);
+
+		header('Location: crowdsource_thanks.php');
+		
+    } else {
+        // Not verified - show form error
+		print_r ($_POST['recaptcha_response']);
+		echo "Error";
+    }
+}
 
 ?>

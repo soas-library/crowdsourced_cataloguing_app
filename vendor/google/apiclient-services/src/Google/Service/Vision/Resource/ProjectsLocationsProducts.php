@@ -58,11 +58,7 @@ class Google_Service_Vision_Resource_ProjectsLocationsProducts extends Google_Se
    *
    * Metadata of the product and all its images will be deleted right away, but
    * search queries against ProductSets containing the product may still work
-   * until all related caches are refreshed.
-   *
-   * Possible errors:
-   *
-   * * Returns NOT_FOUND if the product does not exist. (products.delete)
+   * until all related caches are refreshed. (products.delete)
    *
    * @param string $name Resource name of product to delete.
    *

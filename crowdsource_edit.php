@@ -33,6 +33,15 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/soas.css">
 <!--===============================================================================================-->
+	<script src="https://www.google.com/recaptcha/api.js?render=6Le_IKYUAAAAAImzZSWxuwXJIKFkHEh9s3Am0b1q"></script>
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('6Le_IKYUAAAAAImzZSWxuwXJIKFkHEh9s3Am0b1q', { action: 'edit' }).then(function (token) {
+                var recaptchaResponse = document.getElementById('recaptchaResponse');
+                recaptchaResponse.value = token;
+            });
+        });
+    </script>
 </head>
 <body>
 
@@ -277,6 +286,8 @@
 				
 ?>
 			" name="id" />
+			
+					<input type="hidden" name="recaptcha_response" id="recaptchaResponse">
  
 					<div class="container-login100-form-btn p-b-50">
 						<button class="login100-form-btn">
@@ -312,14 +323,6 @@
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
 <!--===============================================================================================-->
-	<script src="https://www.google.com/recaptcha/api.js?render=6Le_IKYUAAAAAImzZSWxuwXJIKFkHEh9s3Am0b1q"></script>
-	<script>
-		grecaptcha.ready(function() {
-			grecaptcha.execute('6Le_IKYUAAAAAImzZSWxuwXJIKFkHEh9s3Am0b1q', {action: 'crowdsource_submit.php'}).then(function(token) {
-			...
-			});
-	});
-	</script>
 
 </body>
 </html>

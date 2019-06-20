@@ -43,10 +43,12 @@ class Google_Service_Vision extends Google_Service
   public $images;
   public $locations_operations;
   public $operations;
+  public $projects_locations_operations;
   public $projects_locations_productSets;
   public $projects_locations_productSets_products;
   public $projects_locations_products;
   public $projects_locations_products_referenceImages;
+  public $projects_operations;
   
   /**
    * Constructs the internal representation of the Vision service.
@@ -68,7 +70,11 @@ class Google_Service_Vision extends Google_Service
         'files',
         array(
           'methods' => array(
-            'asyncBatchAnnotate' => array(
+            'annotate' => array(
+              'path' => 'v1/files:annotate',
+              'httpMethod' => 'POST',
+              'parameters' => array(),
+            ),'asyncBatchAnnotate' => array(
               'path' => 'v1/files:asyncBatchAnnotate',
               'httpMethod' => 'POST',
               'parameters' => array(),
@@ -84,6 +90,10 @@ class Google_Service_Vision extends Google_Service
           'methods' => array(
             'annotate' => array(
               'path' => 'v1/images:annotate',
+              'httpMethod' => 'POST',
+              'parameters' => array(),
+            ),'asyncBatchAnnotate' => array(
+              'path' => 'v1/images:asyncBatchAnnotate',
               'httpMethod' => 'POST',
               'parameters' => array(),
             ),
@@ -166,6 +176,26 @@ class Google_Service_Vision extends Google_Service
                 'pageSize' => array(
                   'location' => 'query',
                   'type' => 'integer',
+                ),
+              ),
+            ),
+          )
+        )
+    );
+    $this->projects_locations_operations = new Google_Service_Vision_Resource_ProjectsLocationsOperations(
+        $this,
+        $this->serviceName,
+        'operations',
+        array(
+          'methods' => array(
+            'get' => array(
+              'path' => 'v1/{+name}',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'name' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
                 ),
               ),
             ),
@@ -438,6 +468,26 @@ class Google_Service_Vision extends Google_Service
                 'pageSize' => array(
                   'location' => 'query',
                   'type' => 'integer',
+                ),
+              ),
+            ),
+          )
+        )
+    );
+    $this->projects_operations = new Google_Service_Vision_Resource_ProjectsOperations(
+        $this,
+        $this->serviceName,
+        'operations',
+        array(
+          'methods' => array(
+            'get' => array(
+              'path' => 'v1/{+name}',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'name' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
                 ),
               ),
             ),
