@@ -11,6 +11,9 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
+$dotenv = Dotenv\Dotenv::create(__DIR__, 'config.env');
+$dotenv->load();
+
 	// clean up all inputted data
 	function test_input($data) {
 		$data = trim($data);
@@ -23,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])
 	
     // Build POST request:
     $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
-    $recaptcha_secret = '6Le_IKYUAAAAAAf-yh0nFRUCfWm9-kVHFdorzDQb';
+    $recaptcha_secret = $_ENV['recaptcha_secret'];
     $recaptcha_response = $_POST['recaptcha_response'];
 
     // Make and decode POST request:
@@ -69,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])
 		*/
 		$sheets = new \Google_Service_Sheets($client);
 
-		$spreadsheetId = '1dM-YM2-qxIy_CJ95SknO02X330j91PP5d3lFlYiCd_Q';
+		$spreadsheetId = $_ENV['spreadsheet_id'];
 		$range = 'submissions';
 		$valueInputOption = 'USER_ENTERED';
 

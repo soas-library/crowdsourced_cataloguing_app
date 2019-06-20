@@ -76,6 +76,9 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
 
+$dotenv = Dotenv\Dotenv::create(__DIR__, 'config.env');
+$dotenv->load();
+
 /*
  * We need to get a Google_Client object first to handle auth and api calls, etc.
  */
@@ -100,7 +103,7 @@ $client->setAuthConfig(__DIR__ . '/crowdsource-ecca04407a4e.json');
  */
 $sheets = new \Google_Service_Sheets($client);
 
-$spreadsheetId = '1dM-YM2-qxIy_CJ95SknO02X330j91PP5d3lFlYiCd_Q';
+$spreadsheetId = $_ENV['spreadsheet_id'];
 $range = 'submissions';
 
 ?>
