@@ -47,6 +47,11 @@
 
 <?php
 
+	require __DIR__ . '/vendor/autoload.php';
+
+	$dotenv = Dotenv\Dotenv::create(__DIR__, 'config.env');
+	$dotenv->load();
+
 	// clean up all inputted data
     function test_input($data) {
         $data = trim($data);
@@ -59,7 +64,7 @@
 		$bib_id = test_input($_POST["id"]);
 	}
 	else {
-		$solrurl = 'http://james.lis.soas.ac.uk:8983/solr/bib/select?fl=controlfield_001&fq=DocType:bibliographic&fq=Language_search:Bengali&indent=on&q=*&rows=5000&wt=xml';
+		$solrurl = $_ENV['solr_hostname'] . '/solr/bib/select?fl=controlfield_001&fq=DocType:bibliographic&fq=Language_search:Bengali&indent=on&q=*&rows=5000&wt=xml';
 	
 		# Perform Curl request on the Solr API
 		$ch = curl_init();
@@ -78,7 +83,7 @@
 		$bib_id = $xml->result->doc[$random]->arr->str;
 	}
 	
-	$baseurl = 'https://james.lis.soas.ac.uk:8443/oledocstore/documentrest';
+	$baseurl = $_ENV['docstore_hostname'] . '/oledocstore/documentrest';
 	$retrieve_bib = '/bib/doc?bibId=';
 	
 	# Perform Curl request on the OLE API
