@@ -101,8 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])
 		
     } else {
         // Not verified - show form error
-		print_r ($_POST['recaptcha_response']);
-		echo "Error";
+		header('Location: crowdsource_error.php');
     }
 }
 
