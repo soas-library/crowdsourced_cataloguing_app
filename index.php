@@ -44,7 +44,8 @@
 				</div>
 				<form class="login100-form validate-form p-l-55 p-r-55 p-t-175" action="crowdsource_search.php" method="POST">
 					<span class="login100-form-title">
-						Help us learn Bengali
+						Help us learn Bengali<br/>
+						আমাদের বাংলা শিখতে সাহায্য করুন
 					</span>
 
 					<div class="wrap-input100 validate-input m-b-16" data-validate="Search for a book">

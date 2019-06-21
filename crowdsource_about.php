@@ -79,7 +79,8 @@ $range = 'about!A3';
 				</div>
 				<div class="login100-form p-l-55 p-r-55 p-t-150 p-b-50">
 					<span class="login100-form-title">
-						Help us learn Bengali
+						Help us learn Bengali<br/>
+						আমাদের বাংলা শিখতে সাহায্য করুন
 					</span>
 
 					<div class="content100">

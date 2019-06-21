@@ -119,7 +119,8 @@
 				</div>
 				<form class="login100-form validate-form p-l-55 p-r-55 p-t-150" action="crowdsource_submit.php" method="POST">
 					<span class="login100-form-title">
-						Help us learn Bengali
+						Help us learn Bengali<br/>
+						আমাদের বাংলা শিখতে সাহায্য করুন
 					</span>
 
 <?php
