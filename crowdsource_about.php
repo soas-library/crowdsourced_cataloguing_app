@@ -93,8 +93,11 @@ $range = 'about!A3';
 						</div>
 					</div>
 				</div>
-				<span class="flex-col-c p-b-40">
+				<span class="flex-col-c p-b-20">
 					<a href="mailto:libenquiry@soas.ac.uk">Send feedback</a>
+				</span>
+				<span class="flex-col-c p-b-40">
+					<a href="index.php">Home</a>
 				</span>
 			</div>
 		</div>

@@ -208,9 +208,12 @@
 					<span class="flex-col-c p-b-20">
 						<a href="crowdsource_about.php">About the project</a>
 					</span>
-					<span class="flex-col-c p-b-40">
+					<span class="flex-col-c p-b-20">
 						<a href="mailto:libenquiry@soas.ac.uk">Send feedback</a>
-					</span>	
+					</span>
+					<span class="flex-col-c p-b-40">
+						<a href="index.php">Home</a>
+					</span>
 				</div>
 			</div>
 		</div>
