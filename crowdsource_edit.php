@@ -78,7 +78,9 @@
 		# Turn the API response into useful XML
 		$xml = new SimpleXMLElement($response); 
 
-		$random = rand(0,3605);
+		$num_of_records = intval($xml->result['numFound']);
+		
+		$random = rand(0,$num_of_records);
 	
 		$bib_id = $xml->result->doc[$random]->arr->str;
 	}
