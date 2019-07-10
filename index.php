@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>SOAS Library Bengali cataloguing</title>
+	<title>SOAS Library crowdsourced cataloguing</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -35,7 +35,12 @@
 <!--===============================================================================================-->
 </head>
 <body>
-	
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::create(__DIR__, 'config.env');
+$dotenv->load();
+?>
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
@@ -44,8 +49,7 @@
 				</div>
 				<form class="login100-form validate-form p-l-55 p-r-55 p-t-175" action="crowdsource_search.php" method="POST">
 					<span class="login100-form-title">
-						Help us learn Bengali<br/>
-						আমাদের বাংলা শিখতে সাহায্য করুন
+						Help us learn <?php echo $_ENV['language']; ?>
 					</span>
 
 					<div class="wrap-input100 validate-input m-b-16" data-validate="Search for a book">
@@ -75,10 +79,6 @@
 				</div>
 				
 <?php
-require __DIR__ . '/vendor/autoload.php';
-
-$dotenv = Dotenv\Dotenv::create(__DIR__, 'config.env');
-$dotenv->load();
 
 /*
  * We need to get a Google_Client object first to handle auth and api calls, etc.

@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>SOAS Library Bengali cataloguing</title>
+	<title>SOAS Library crowdsourced cataloguing</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -79,8 +79,7 @@ $range = 'submissions';
 				</div>
 				<div class="login100-form p-l-55 p-r-55 p-t-150 p-b-50">
 					<span class="login100-form-title">
-						Help us learn Bengali<br/>
-						আমাদের বাংলা শিখতে সাহায্য করুন
+						Help us learn <?php echo $_ENV['language']; ?>
 					</span>
 
 					<div class="content100">

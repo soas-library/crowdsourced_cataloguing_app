@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>SOAS Library Bengali cataloguing</title>
+	<title>SOAS Library crowdsourced cataloguing</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -35,6 +35,12 @@
 <!--===============================================================================================-->
 </head>
 <body>
+<?php
+	require __DIR__ . '/vendor/autoload.php';
+
+	$dotenv = Dotenv\Dotenv::create(__DIR__, 'config.env');
+	$dotenv->load();
+?>
 
 	<div class="limiter">
 		<div class="container-login100">
@@ -44,21 +50,15 @@
 				</div>
 				<div class="login100-form p-l-55 p-r-55 p-t-150">
 					<span class="login100-form-title">
-						Help us learn Bengali<br/>
-						আমাদের বাংলা শিখতে সাহায্য করুন
+						Help us learn <?php echo $_ENV['language']; ?>
 					</span>
 
 					<div class="content100">
 <?php
 
-	require __DIR__ . '/vendor/autoload.php';
-
-	$dotenv = Dotenv\Dotenv::create(__DIR__, 'config.env');
-	$dotenv->load();
-
 	$search = urlencode($_POST["search"]);
 
-	$solrurl = $_ENV['solr_hostname'] . '/solr/bib/select?fl=bibIdentifier&fq=DocType:bibliographic&fq=Language_search:Bengali&indent=on&q=Title_search:' . $search . '%20OR%20Author_search:' . $search . '%20OR%20Publisher_search:' . $search . '%20OR%20PublicationDate_search:' . $search . '%20OR%20PublicationPlace_search:' . $search . '%20OR%20LocalId_display:' . $search . '%20OR%20ItemBarcode_search:' . $search . '%20OR%20ISBN_search:' . $search . '&rows=5000&wt=xml';
+	$solrurl = $_ENV['solr_hostname'] . '/solr/bib/select?fl=bibIdentifier&fq=DocType:bibliographic&fq=Language_search:' . $_ENV['language'] . '&indent=on&q=Title_search:' . $search . '%20OR%20Author_search:' . $search . '%20OR%20Publisher_search:' . $search . '%20OR%20PublicationDate_search:' . $search . '%20OR%20PublicationPlace_search:' . $search . '%20OR%20LocalId_display:' . $search . '%20OR%20ItemBarcode_search:' . $search . '%20OR%20ISBN_search:' . $search . '&rows=5000&wt=xml';
 
 	# Perform Curl request on the Solr API
 	$ch = curl_init();
