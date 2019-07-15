@@ -39,6 +39,7 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
 
+#Retrieve configuration variables from the config.env file
 $dotenv = Dotenv\Dotenv::create(__DIR__, 'config.env');
 $dotenv->load();
 
@@ -67,7 +68,11 @@ $client->setAuthConfig(__DIR__ . '/crowdsource-ecca04407a4e.json');
 $sheets = new \Google_Service_Sheets($client);
 
 $spreadsheetId = $_ENV['spreadsheet_id'];
-$range = 'submissions';
+$range = 'config!A3';
+
+#$language = $_ENV['language'];
+$language_array = $sheets->spreadsheets_values->get($spreadsheetId, $range);
+$language = $language_array['values'][0][0];
 
 ?>
 
@@ -79,7 +84,7 @@ $range = 'submissions';
 				</div>
 				<div class="login100-form p-l-55 p-r-55 p-t-150 p-b-50">
 					<span class="login100-form-title">
-						Help us learn <?php echo $_ENV['language']; ?>
+						Help us learn <?php echo $language; ?>
 					</span>
 
 					<div class="content100">
@@ -92,6 +97,8 @@ $range = 'submissions';
 								We have received
 							
 <?php
+						$range = 'submissions';
+
 						$result = $sheets->spreadsheets_values->get($spreadsheetId, $range);
 						$numRows = ($result->getValues() != null ? count($result->getValues()) : 0) - 1;
 						printf("%d", $numRows);

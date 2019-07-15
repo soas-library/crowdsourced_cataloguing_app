@@ -39,6 +39,7 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
 
+#Retrieve configuration variables from the config.env file
 $dotenv = Dotenv\Dotenv::create(__DIR__, 'config.env');
 $dotenv->load();
 
@@ -69,6 +70,10 @@ $sheets = new \Google_Service_Sheets($client);
 $spreadsheetId = $_ENV['spreadsheet_id'];
 $range = 'config!A3';
 
+#$language = $_ENV['language'];
+$language_array = $sheets->spreadsheets_values->get($spreadsheetId, $range);
+$language = $language_array['values'][0][0];
+
 ?>
 
 	<div class="limiter">
@@ -79,12 +84,14 @@ $range = 'config!A3';
 				</div>
 				<div class="login100-form p-l-55 p-r-55 p-t-150 p-b-50">
 					<span class="login100-form-title">
-						Help us learn <?php echo $_ENV['language']; ?>
+						Help us learn <?php echo $language; ?>
 					</span>
 
 					<div class="content100">
 						<div class="wrap-content100">
 <?php
+							$range = 'config!A7';
+
 							$result = $sheets->spreadsheets_values->get($spreadsheetId, $range);
 							
 							echo $result['values'][0][0];

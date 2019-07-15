@@ -36,10 +36,43 @@
 </head>
 <body>
 <?php
-	require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 
-	$dotenv = Dotenv\Dotenv::create(__DIR__, 'config.env');
-	$dotenv->load();
+#Retrieve configuration variables from the config.env file
+$dotenv = Dotenv\Dotenv::create(__DIR__, 'config.env');
+$dotenv->load();
+
+/*
+ * We need to get a Google_Client object first to handle auth and api calls, etc.
+ */
+$client = new \Google_Client();
+$client->setApplicationName('crowdsource');
+$client->setScopes([\Google_Service_Sheets::SPREADSHEETS]);
+$client->setAccessType('offline');
+
+/*
+ * The JSON auth file can be provided to the Google Client in two ways, one is as a string which is assumed to be the
+ * path to the json file. This is a nice way to keep the creds out of the environment.
+ *
+ * The second option is as an array. For this example I'll pull the JSON from an environment variable, decode it, and
+ * pass along.
+ */
+#$jsonAuth = getenv('JSON_AUTH');
+#$client->setAuthConfig(json_decode($jsonAuth, true));
+$client->setAuthConfig(__DIR__ . '/crowdsource-ecca04407a4e.json');
+
+/*
+ * With the Google_Client we can get a Google_Service_Sheets service object to interact with sheets
+ */
+$sheets = new \Google_Service_Sheets($client);
+
+$spreadsheetId = $_ENV['spreadsheet_id'];
+$range = 'config!A3';
+
+#$language = $_ENV['language'];
+$language_array = $sheets->spreadsheets_values->get($spreadsheetId, $range);
+$language = $language_array['values'][0][0];
+
 ?>
 
 	<div class="limiter">
@@ -50,7 +83,7 @@
 				</div>
 				<div class="login100-form p-l-55 p-r-55 p-t-150">
 					<span class="login100-form-title">
-						Help us learn <?php echo $_ENV['language']; ?>
+						Help us learn <?php echo $language; ?>
 					</span>
 
 					<div class="content100">
@@ -58,7 +91,7 @@
 
 	$search = urlencode($_POST["search"]);
 
-	$solrurl = $_ENV['solr_hostname'] . '/solr/bib/select?fl=bibIdentifier&fq=DocType:bibliographic&fq=Language_search:' . $_ENV['language'] . '&indent=on&q=Title_search:' . $search . '%20OR%20Author_search:' . $search . '%20OR%20Publisher_search:' . $search . '%20OR%20PublicationDate_search:' . $search . '%20OR%20PublicationPlace_search:' . $search . '%20OR%20LocalId_display:' . $search . '%20OR%20ItemBarcode_search:' . $search . '%20OR%20ISBN_search:' . $search . '&rows=5000&wt=xml';
+	$solrurl = $_ENV['solr_hostname'] . '/solr/bib/select?fl=bibIdentifier&fq=DocType:bibliographic&fq=Language_search:' . $language . '&indent=on&q=Title_search:' . $search . '%20OR%20Author_search:' . $search . '%20OR%20Publisher_search:' . $search . '%20OR%20PublicationDate_search:' . $search . '%20OR%20PublicationPlace_search:' . $search . '%20OR%20LocalId_display:' . $search . '%20OR%20ItemBarcode_search:' . $search . '%20OR%20ISBN_search:' . $search . '&rows=5000&wt=xml';
 
 	# Perform Curl request on the Solr API
 	$ch = curl_init();
