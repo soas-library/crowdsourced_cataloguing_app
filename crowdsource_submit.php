@@ -41,10 +41,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])
 		$id = $title = $alt_title = $author = $publication = $comment = "";
 	
 		$id = $_POST["id"];
-		$title = test_input($_POST["title"]);
-		$alt_title = test_input($_POST["alt_title"]);
-		$author = test_input($_POST["author"]);
-		$publication = test_input($_POST["publication"]);
+		$title_submission = test_input($_POST["title_submission"]);
+		$alt_title_submission = test_input($_POST["alt_title_submission"]);
+		$author_submission = test_input($_POST["author_submission"]);
+		$publication_submission = test_input($_POST["publication_submission"]);
+		$title_original = test_input($_POST["title_original"]);
+		$title_vernacular = test_input($_POST["title_vernacular"]);
+		$alt_title_original = test_input($_POST["alt_title_original"]);
+		$alt_title_vernacular = test_input($_POST["alt_title_vernacular"]);
+		$author_original = test_input($_POST["author_original"]);
+		$author_vernacular = test_input($_POST["author_vernacular"]);
+		$publication_original = test_input($_POST["publication_original"]);
+		$publication_vernacular = test_input($_POST["publication_vernacular"]);
 		$email = test_input($_POST["email"]);
 		$comment = test_input($_POST["comment"]);
 
@@ -78,14 +86,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])
 
 		$values = [
 				[
+					date('c'),
 					$id,
-					$title,
-					$alt_title,
-					$author,
-					$publication,
+					$title_original,
+					$title_vernacular,
+					$title_submission,
+					$alt_title_original,
+					$alt_title_vernacular,
+					$alt_title_submission,
+					$author_original,
+					$author_vernacular,
+					$author_submission,
+					$publication_original,
+					$publication_vernacular,
+					$publication_submission,
 					$email,
-					$comment,
-					date('c')
+					$comment
 				]
 		];
 

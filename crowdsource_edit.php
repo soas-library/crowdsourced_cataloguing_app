@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>SOAS Library Bengali cataloguing</title>
+	<title>SOAS Library crowdsourced cataloguing</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -157,7 +157,7 @@
 						</div>
 					
 						<div class="wrap-input100 m-b-16" data-validate="Title">
-							<input class="input100" type="text" name="title" placeholder="Enter your suggestion here">
+							<input class="input100" type="text" name="title_submission" placeholder="Enter your suggestion here">
 							<span class="focus-input100"></span>
 						</div>
 					</div>
@@ -188,7 +188,7 @@
 						</div>
 					
 						<div class="wrap-input100 m-b-16" data-validate="Alternative title">
-							<input class="input100" type="text" name="alt_title" placeholder="Enter your suggestion here">
+							<input class="input100" type="text" name="alt_title_submission" placeholder="Enter your suggestion here">
 							<span class="focus-input100"></span>
 						</div>
 					</div>
@@ -222,7 +222,7 @@
 						</div>
 					
 						<div class="wrap-input100 m-b-16" data-validate="Author">
-							<input class="input100" type="text" name="author" placeholder="Enter your suggestion here">
+							<input class="input100" type="text" name="author_submission" placeholder="Enter your suggestion here">
 							<span class="focus-input100"></span>
 						</div>
 					</div>
@@ -256,7 +256,7 @@
 						</div>
 					
 						<div class="wrap-input100 m-b-16" data-validate="Publication details">
-							<input class="input100" type="text" name="publication" placeholder="Enter your suggestion here">
+							<input class="input100" type="text" name="publication_submission" placeholder="Enter your suggestion here">
 							<span class="focus-input100"></span>
 						</div>
 					</div>
@@ -284,6 +284,8 @@
 						</div>
 					</div>
 
+<!-- Send hidden inputs such as original Marc fields -->
+
 					<input type="hidden" value="
 <?php 
 			
@@ -292,7 +294,87 @@
 						}
 				
 ?>
-			" name="id" />
+					" name="id" />
+			
+					<input type="hidden" value="
+<?php 
+			
+						foreach ($content->xpath("///a:datafield[@tag='245']/a:subfield[@code!='6']") as $controlfield) {
+							echo (string) $controlfield;
+						}
+				
+?>
+					" name="title_original" />
+					
+					<input type="hidden" value="
+<?php 
+			
+						foreach ($content->xpath("///a:datafield[@tag='880'][contains(.,'245')]/a:subfield[@code!='6']") as $controlfield) {
+							echo (string) $controlfield;
+						}
+				
+?>
+					" name="title_vernacular" />
+					
+					<input type="hidden" value="
+<?php 
+			
+						foreach ($content->xpath("///a:datafield[@tag='246']/a:subfield[@code!='6']") as $controlfield) {
+							echo (string) $controlfield;
+						}
+				
+?>
+					" name="alt_title_original" />
+					
+					<input type="hidden" value="
+<?php 
+			
+						foreach ($content->xpath("///a:datafield[@tag='880'][contains(.,'246')]/a:subfield[@code!='6']") as $controlfield) {
+							echo (string) $controlfield;
+						}
+				
+?>
+					" name="alt_title_vernacular" />
+					
+					<input type="hidden" value="
+<?php 
+			
+						foreach ($content->xpath("///a:datafield[@tag='100']/a:subfield[@code!='6']") as $controlfield) {
+							echo (string) $controlfield;
+						}
+				
+?>
+					" name="author_original" />
+					
+					<input type="hidden" value="
+<?php 
+			
+						foreach ($content->xpath("///a:datafield[@tag='880'][contains(.,'100')]/a:subfield[@code!='6']") as $controlfield) {
+							echo (string) $controlfield;
+						}
+				
+?>
+					" name="author_vernacular" />
+					
+					<input type="hidden" value="
+<?php 
+			
+						foreach ($content->xpath("///a:datafield[@tag='260']/a:subfield[@code!='6']|///a:datafield[@tag='264']/a:subfield[@code!='6']") as $controlfield) {
+							echo (string) $controlfield;
+						}
+				
+?>
+					" name="publication_original" />
+					
+					<input type="hidden" value="
+<?php 
+			
+						foreach ($content->xpath("///a:datafield[@tag='880'][contains(.,'260')]/a:subfield[@code!='6']|///a:datafield[@tag='880'][contains(.,'264')]/a:subfield[@code!='6']") as $controlfield) {
+							echo (string) $controlfield;
+						}
+				
+?>
+					" name="publication_vernacular" />
 			
 					<input type="hidden" name="recaptcha_response" id="recaptchaResponse">
  

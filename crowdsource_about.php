@@ -67,7 +67,7 @@ $client->setAuthConfig(__DIR__ . '/crowdsource-ecca04407a4e.json');
 $sheets = new \Google_Service_Sheets($client);
 
 $spreadsheetId = $_ENV['spreadsheet_id'];
-$range = 'about!A3';
+$range = 'config!A3';
 
 ?>
 
