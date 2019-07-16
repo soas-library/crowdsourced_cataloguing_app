@@ -40,7 +40,7 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
 
-// Retieve configuration variables from the config.env file
+// Retrieve configuration variables from the config.env file
 $dotenv = Dotenv\Dotenv::create(__DIR__, 'config.env');
 $dotenv->load();
 
