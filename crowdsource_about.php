@@ -5,6 +5,7 @@
 # @license: The MIT License <https://opensource.org/licenses/MIT>
 # @author: Simon Bowie <sb174@soas.ac.uk>
 # @purpose: A prototype of a web application to crowdsource cataloguing for SOAS' bibliographic records
+# @description: 'About' page which is configurable by the library through editing the Google Sheets spreadsheet identified in the config.env file
 ?>
 
 <!DOCTYPE html>
@@ -39,10 +40,11 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
 
-#Retrieve configuration variables from the config.env file
+### RETRIEVE CONFIGURATION VARIABLES FROM THE CONFIG.ENV FILE
 $dotenv = Dotenv\Dotenv::create(__DIR__, 'config.env');
 $dotenv->load();
 
+### CONNECT TO GOOGLE SHEETS API
 /*
  * We need to get a Google_Client object first to handle auth and api calls, etc.
  */
@@ -54,9 +56,6 @@ $client->setAccessType('offline');
 /*
  * The JSON auth file can be provided to the Google Client in two ways, one is as a string which is assumed to be the
  * path to the json file. This is a nice way to keep the creds out of the environment.
- *
- * The second option is as an array. For this example I'll pull the JSON from an environment variable, decode it, and
- * pass along.
  */
 #$jsonAuth = getenv('JSON_AUTH');
 #$client->setAuthConfig(json_decode($jsonAuth, true));
@@ -67,6 +66,7 @@ $client->setAuthConfig(__DIR__ . '/crowdsource-ecca04407a4e.json');
  */
 $sheets = new \Google_Service_Sheets($client);
 
+### RETRIEVE THE LANGUAGE FOR THE APPLICATION TO WORK ON FROM THE GOOGLE SHEETS SPREADSHEET IDENTIFIED IN THE CONFIG.ENV FILE
 $spreadsheetId = $_ENV['spreadsheet_id'];
 $range = 'config!A3';
 
@@ -83,10 +83,12 @@ $language = $language_array['values'][0][0];
 					<a href="index.php"><img src="images/soas-logo-transparent.png" alt="SOAS Library" class="logo"></a>
 				</div>
 				<div class="login100-form p-l-55 p-r-55 p-t-150 p-b-50">
+					<!-- THE LANGUAGE OF THE APPLICATION IS DETERMINED BY A VARIABLE SET IN THE GOOGLE SHEETS SPREADSHEET IDENTIFIED IN THE CONFIG.ENV FILE -->
 					<span class="login100-form-title">
 						Help us learn <?php echo $language; ?>
 					</span>
 
+					<!-- RETRIEVE COPY FOR THE 'ABOUT' PAGE FROM THE GOOGLE SHEETS SPREADSHEET IDENTIFIED IN THE CONFIG.ENV FILE. THIS ALLOWS THE LIBRARY TO EASILY WRITE THEIR OWN COPY AND MAKE CHANGES WITHOUT INVOLVING I&T STAFF -->
 					<div class="content100">
 						<div class="wrap-content100">
 <?php

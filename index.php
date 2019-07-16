@@ -5,6 +5,7 @@
 # @license: The MIT License <https://opensource.org/licenses/MIT>
 # @author: Simon Bowie <sb174@soas.ac.uk>
 # @purpose: A prototype of a web application to crowdsource cataloguing for SOAS' bibliographic records
+# @description: This is the homepage of the application. It presents two choices for users: search for a specific bib record or pick a random bib record.
 ?>
 
 <!DOCTYPE html>
@@ -38,10 +39,11 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
 
-#Retrieve configuration variables from the config.env file
+### RETRIEVE CONFIGURATION VARIABLES FROM THE CONFIG.ENV FILE
 $dotenv = Dotenv\Dotenv::create(__DIR__, 'config.env');
 $dotenv->load();
 
+### CONNECT TO GOOGLE SHEETS API
 /*
  * We need to get a Google_Client object first to handle auth and api calls, etc.
  */
@@ -53,9 +55,6 @@ $client->setAccessType('offline');
 /*
  * The JSON auth file can be provided to the Google Client in two ways, one is as a string which is assumed to be the
  * path to the json file. This is a nice way to keep the creds out of the environment.
- *
- * The second option is as an array. For this example I'll pull the JSON from an environment variable, decode it, and
- * pass along.
  */
 #$jsonAuth = getenv('JSON_AUTH');
 #$client->setAuthConfig(json_decode($jsonAuth, true));
@@ -66,6 +65,7 @@ $client->setAuthConfig(__DIR__ . '/crowdsource-ecca04407a4e.json');
  */
 $sheets = new \Google_Service_Sheets($client);
 
+### RETRIEVE THE LANGUAGE FOR THE APPLICATION TO WORK ON FROM THE GOOGLE SHEETS SPREADSHEET IDENTIFIED IN THE CONFIG.ENV FILE
 $spreadsheetId = $_ENV['spreadsheet_id'];
 $range = 'config!A3';
 
@@ -80,7 +80,9 @@ $language = $language_array['values'][0][0];
 				<div class="logo-div">
 					<a href="index.php"><img src="images/soas-logo-transparent.png" alt="SOAS Library" class="logo"></a>
 				</div>
+				<!-- THIS FORM SUBMITS SEARCH PARAMETERS AND REDIRECTS TO CROWDSOURCE_SEARCH.PHP -->
 				<form class="login100-form validate-form p-l-55 p-r-55 p-t-175" action="crowdsource_search.php" method="POST">
+					<!-- THE LANGUAGE OF THE APPLICATION IS DETERMINED BY A VARIABLE SET IN THE GOOGLE SHEETS SPREADSHEET IDENTIFIED IN THE CONFIG.ENV FILE -->
 					<span class="login100-form-title">
 						Help us learn <?php echo $language; ?>
 					</span>
@@ -104,6 +106,7 @@ $language = $language_array['values'][0][0];
 						</span>
 					</div>
 					
+					<!-- LINK TO CROWDSOURCE_EDIT.PHP. WITHOUT SEARCH PARAMETERS, CROWDSOURCE_EDIT WILL DISPLAY A RANDOM BOOK -->
 					<div class="container-login100-form-btn">
 						<a href="crowdsource_edit.php" class="button">
 							pick a random book
@@ -111,6 +114,7 @@ $language = $language_array['values'][0][0];
 					</div>
 				</div>
 				
+				<!-- DISPLAY HOW MANY CONTRIBUTIONS HAVE BEEN RECEIVED SO FAR BY COUNTING HOW MANY ROWS THERE ARE IN THE GOOGLE SHEETS SPREADSHEET (AND SUBTRACTING 1 FOR THE HEADER ROW) -->
 				<div class="flex-col-c p-t-40 p-b-20">
 					<span class="txt1 p-b-9">
 						We have received
