@@ -40,7 +40,7 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
 
-// Retieve configuration variables from the config.env file
+// Retrieve configuration variables from the config.env file
 $dotenv = Dotenv\Dotenv::create(__DIR__, 'config.env');
 $dotenv->load();
 
@@ -97,7 +97,6 @@ $language = $language_array['values'][0][0];
 						<div class="flex-col-c p-t-50">
 							<span class="txt1 p-b-9">
 								We have received
-							
 <?php
 						$range = 'submissions';
 
