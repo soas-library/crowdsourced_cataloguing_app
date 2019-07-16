@@ -39,11 +39,11 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
 
-### RETRIEVE CONFIGURATION VARIABLES FROM THE CONFIG.ENV FILE
+// Retieve configuration variables from the config.env file
 $dotenv = Dotenv\Dotenv::create(__DIR__, 'config.env');
 $dotenv->load();
 
-### CONNECT TO GOOGLE SHEETS API
+// Connect to Google Sheets API
 /*
  * We need to get a Google_Client object first to handle auth and api calls, etc.
  */
@@ -65,7 +65,7 @@ $client->setAuthConfig(__DIR__ . '/crowdsource-ecca04407a4e.json');
  */
 $sheets = new \Google_Service_Sheets($client);
 
-### RETRIEVE THE LANGUAGE FOR THE APPLICATION TO WORK ON FROM THE GOOGLE SHEETS SPREADSHEET IDENTIFIED IN THE CONFIG.ENV FILE
+// Retrieve the language for the application to work on from the Google Sheets spreadsheet identified in config.env
 $spreadsheetId = $_ENV['spreadsheet_id'];
 $range = 'config!A3';
 
@@ -80,9 +80,9 @@ $language = $language_array['values'][0][0];
 				<div class="logo-div">
 					<a href="index.php"><img src="images/soas-logo-transparent.png" alt="SOAS Library" class="logo"></a>
 				</div>
-				<!-- THIS FORM SUBMITS SEARCH PARAMETERS AND REDIRECTS TO CROWDSOURCE_SEARCH.PHP -->
+				<!-- This form submits search parameters and redirects to crowdsource_search.php -->
 				<form class="login100-form validate-form p-l-55 p-r-55 p-t-175" action="crowdsource_search.php" method="POST">
-					<!-- THE LANGUAGE OF THE APPLICATION IS DETERMINED BY A VARIABLE SET IN THE GOOGLE SHEETS SPREADSHEET IDENTIFIED IN THE CONFIG.ENV FILE -->
+					<!-- The language of the application is determined by a variable set in the Google Sheets spreadsheet identified in config.env -->
 					<span class="login100-form-title">
 						Help us learn <?php echo $language; ?>
 					</span>
@@ -106,7 +106,7 @@ $language = $language_array['values'][0][0];
 						</span>
 					</div>
 					
-					<!-- LINK TO CROWDSOURCE_EDIT.PHP. WITHOUT SEARCH PARAMETERS, CROWDSOURCE_EDIT WILL DISPLAY A RANDOM BOOK -->
+					<!-- Link to crowdsource_edit.php. Without search parameters, crowdsource_edit will display a random book -->
 					<div class="container-login100-form-btn">
 						<a href="crowdsource_edit.php" class="button">
 							pick a random book
@@ -114,7 +114,7 @@ $language = $language_array['values'][0][0];
 					</div>
 				</div>
 				
-				<!-- DISPLAY HOW MANY CONTRIBUTIONS HAVE BEEN RECEIVED SO FAR BY COUNTING HOW MANY ROWS THERE ARE IN THE GOOGLE SHEETS SPREADSHEET (AND SUBTRACTING 1 FOR THE HEADER ROW) -->
+				<!-- Display how many contributions have been received so far by counting how many rows there are in the 'submissions' sheet in the Google Sheets spreadsheet (and subtracting 1 for the header row) -->
 				<div class="flex-col-c p-t-40 p-b-20">
 					<span class="txt1 p-b-9">
 						We have received

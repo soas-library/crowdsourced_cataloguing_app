@@ -40,11 +40,11 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
 
-### RETRIEVE CONFIGURATION VARIABLES FROM THE CONFIG.ENV FILE
+// Retieve configuration variables from the config.env file
 $dotenv = Dotenv\Dotenv::create(__DIR__, 'config.env');
 $dotenv->load();
 
-### CONNECT TO GOOGLE SHEETS API
+// Connect to Google Sheets API
 /*
  * We need to get a Google_Client object first to handle auth and api calls, etc.
  */
@@ -66,7 +66,7 @@ $client->setAuthConfig(__DIR__ . '/crowdsource-ecca04407a4e.json');
  */
 $sheets = new \Google_Service_Sheets($client);
 
-### RETRIEVE THE LANGUAGE FOR THE APPLICATION TO WORK ON FROM THE GOOGLE SHEETS SPREADSHEET IDENTIFIED IN THE CONFIG.ENV FILE
+// Retrieve the language for the application to work on from the Google Sheets spreadsheet identified in config.env
 $spreadsheetId = $_ENV['spreadsheet_id'];
 $range = 'config!A3';
 
@@ -83,12 +83,12 @@ $language = $language_array['values'][0][0];
 					<a href="index.php"><img src="images/soas-logo-transparent.png" alt="SOAS Library" class="logo"></a>
 				</div>
 				<div class="login100-form p-l-55 p-r-55 p-t-150 p-b-50">
-					<!-- THE LANGUAGE OF THE APPLICATION IS DETERMINED BY A VARIABLE SET IN THE GOOGLE SHEETS SPREADSHEET IDENTIFIED IN THE CONFIG.ENV FILE -->
+					<!-- The language of the application is determined by a variable set in the Google Sheets spreadsheet identified in config.env -->
 					<span class="login100-form-title">
 						Help us learn <?php echo $language; ?>
 					</span>
 
-					<!-- RETRIEVE COPY FOR THE 'ABOUT' PAGE FROM THE GOOGLE SHEETS SPREADSHEET IDENTIFIED IN THE CONFIG.ENV FILE. THIS ALLOWS THE LIBRARY TO EASILY WRITE THEIR OWN COPY AND MAKE CHANGES WITHOUT INVOLVING I&T STAFF -->
+					<!-- Retrieve copy for the 'about' page from the 'config' sheet of the Google Sheets spreadsheet. This allows the library to easily write their own copy and make changes without involving I&T staff -->
 					<div class="content100">
 						<div class="wrap-content100">
 <?php

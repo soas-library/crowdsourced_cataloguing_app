@@ -5,6 +5,7 @@
 # @license: The MIT License <https://opensource.org/licenses/MIT>
 # @author: Simon Bowie <sb174@soas.ac.uk>
 # @purpose: A prototype of a web application to crowdsource cataloguing for SOAS' bibliographic records
+# @description: Error page for if the user fails Google reCAPTCHA verification from crowdsource_submit.php
 ?>
 
 <!DOCTYPE html>
@@ -39,10 +40,11 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
 
-#Retrieve configuration variables from the config.env file
+// Retieve configuration variables from the config.env file
 $dotenv = Dotenv\Dotenv::create(__DIR__, 'config.env');
 $dotenv->load();
 
+// Connect to Google Sheets API
 /*
  * We need to get a Google_Client object first to handle auth and api calls, etc.
  */
@@ -54,9 +56,6 @@ $client->setAccessType('offline');
 /*
  * The JSON auth file can be provided to the Google Client in two ways, one is as a string which is assumed to be the
  * path to the json file. This is a nice way to keep the creds out of the environment.
- *
- * The second option is as an array. For this example I'll pull the JSON from an environment variable, decode it, and
- * pass along.
  */
 #$jsonAuth = getenv('JSON_AUTH');
 #$client->setAuthConfig(json_decode($jsonAuth, true));
@@ -67,6 +66,7 @@ $client->setAuthConfig(__DIR__ . '/crowdsource-ecca04407a4e.json');
  */
 $sheets = new \Google_Service_Sheets($client);
 
+// Retrieve the language for the application to work on from the Google Sheets spreadsheet identified in config.env
 $spreadsheetId = $_ENV['spreadsheet_id'];
 $range = 'config!A3';
 
@@ -83,6 +83,7 @@ $language = $language_array['values'][0][0];
 					<a href="index.php"><img src="images/soas-logo-transparent.png" alt="SOAS Library" class="logo"></a>
 				</div>
 				<div class="login100-form p-l-55 p-r-55 p-t-150 p-b-50">
+					<!-- The language of the application is determined by a variable set in the Google Sheets spreadsheet identified in config.env -->
 					<span class="login100-form-title">
 						Help us learn <?php echo $language; ?>
 					</span>
@@ -92,6 +93,7 @@ $language = $language_array['values'][0][0];
 							Sorry, an error has occurred. Please try your submission again later.
 						</div>
 						
+				<!-- Display how many contributions have been received so far by counting how many rows there are in the 'submissions' sheet in the Google Sheets spreadsheet (and subtracting 1 for the header row) -->
 				<div class="flex-col-c p-t-40 p-b-20">
 					<span class="txt1 p-b-9">
 						We have received
