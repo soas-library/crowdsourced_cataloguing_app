@@ -111,7 +111,7 @@ $language = $language_array['values'][0][0];
 					<a href="crowdsource_about.php">About the project</a>
 				</span>
 				<span class="flex-col-c p-b-20">
-					<a href="mailto:libenquiry@soas.ac.uk">Send feedback</a>
+					<a href="mailto:library.systems@soas.ac.uk">Send feedback</a>
 				</span>
 				<span class="flex-col-c p-b-40">
 					<a href="index.php">Home</a>
