@@ -102,7 +102,7 @@ $language = $language_array['values'][0][0];
 					</div>
 				</div>
 				<span class="flex-col-c p-b-20">
-					<a href="mailto:library.systems@soas.ac.uk">Send feedback</a>
+					<a href="crowdsource_feedback.php">Send feedback</a>
 				</span>
 				<span class="flex-col-c p-b-40">
 					<a href="index.php">Home</a>
