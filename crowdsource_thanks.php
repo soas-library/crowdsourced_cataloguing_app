@@ -89,9 +89,22 @@ $language = $language_array['values'][0][0];
 					</span>
 
 					<div class="content100">
-						<div class="wrap-content100">
-							Thank you for contributing to SOAS Library's cataloguing enhancement project.
-						</div>
+<?php
+						// Check if we've come from crowdsource_submit.php or crowdsource_feedback_submit.php 
+						if (strpos($_SERVER['HTTP_REFERER'], 'feedback') !== false):
+?>
+							<div class="wrap-content100">
+								Thank you for submitting feedback about SOAS Library's cataloguing enhancement project.
+							</div>
+<?php
+						else:
+?>					
+							<div class="wrap-content100">
+								Thank you for contributing to SOAS Library's cataloguing enhancement project.
+							</div>
+<?php
+						endif;
+?>
 						
 						<!-- Display how many contributions have been received so far by counting how many rows there are in the 'submissions' sheet in the Google Sheets spreadsheet (and subtracting 1 for the header row) -->
 						<div class="flex-col-c p-t-50">
