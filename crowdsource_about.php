@@ -97,7 +97,10 @@ $language = $language_array['values'][0][0];
 							$result = $sheets->spreadsheets_values->get($spreadsheetId, $range);
 							
 							echo $result['values'][0][0];
-?>							
+?>
+						</div>
+						<div class="wrap-content100 p-t-30">
+							Developed by SOAS I&T Directorate. Source code is © SOAS, University of London and is licensed under an MIT License: the source code is available at <a href="https://github.com/soas-library/crowdsourced_cataloguing_app">https://github.com/soas-library/crowdsourced_cataloguing_app</a>.
 						</div>
 					</div>
 				</div>
