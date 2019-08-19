@@ -91,13 +91,16 @@
 			<div class="wrap-login100">
 				<div class="logo-div">
 					<a href="index.php"><img src="images/soas-logo-transparent.png" alt="SOAS Library" class="logo"></a>
-				</div>
-				<!-- This form submits user feedback to crowdsource_feedback_submit.php -->
-				<form class="login100-form validate-form p-l-55 p-r-55 p-t-150" action="crowdsource_feedback_submit.php" method="POST">
 					<!-- The language of the application is determined by a variable set in the Google Sheets spreadsheet identified in config.env -->
-					<span class="login100-form-title">
+					<span class="title-content100">
 						Help us learn <?php echo $language; ?>
 					</span>
+					<span class="subtitle-content100">
+						You can help us make <?php echo $language; ?> books easier to find by submitting titles and authors in the original script
+					</span>
+				</div>
+				<!-- This form submits user feedback to crowdsource_feedback_submit.php -->
+				<form class="login100-form validate-form p-l-55 p-r-55 p-t-50" action="crowdsource_feedback_submit.php" method="POST">
 					
 					<!-- Users enter name here -->
 					<div class="content100 p-t-15">

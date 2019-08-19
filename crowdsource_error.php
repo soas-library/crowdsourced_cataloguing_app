@@ -81,13 +81,15 @@ $language = $language_array['values'][0][0];
 			<div class="wrap-login100">
 				<div class="logo-div">
 					<a href="index.php"><img src="images/soas-logo-transparent.png" alt="SOAS Library" class="logo"></a>
-				</div>
-				<div class="login100-form p-l-55 p-r-55 p-t-150 p-b-50">
 					<!-- The language of the application is determined by a variable set in the Google Sheets spreadsheet identified in config.env -->
-					<span class="login100-form-title">
+					<span class="title-content100">
 						Help us learn <?php echo $language; ?>
 					</span>
-
+					<span class="subtitle-content100">
+						You can help us make <?php echo $language; ?> books easier to find by submitting titles and authors in the original script
+					</span>
+				</div>
+				<div class="login100-form p-l-55 p-r-55 p-t-50 p-b-50">
 					<div class="content100">
 						<div class="wrap-content100">
 							Sorry, an error has occurred. Please try your submission again later.

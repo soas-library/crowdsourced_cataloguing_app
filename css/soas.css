@@ -26,6 +26,38 @@
     margin-top: 15px;
 }
 
+.title-content100 {
+  font-family: SourceSansPro-Bold;
+  font-size: 35px;
+  color: #212529;
+  line-height: 1.2;
+  text-align: center;
+
+  display: block;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: #e7e0d2;
+  padding-top: 20px;
+  padding-bottom: 15px;
+}
+
+.subtitle-content100 {
+  font-family: SourceSansPro-bold;
+  font-size: 20px;
+  color: #212529;
+  line-height: 1.2;
+  text-align: center;
+
+  display: block;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: #e7e0d2;
+  padding-top: 10px;
+  padding-bottom: 15px;
+}
+
 a.button {
 	outline: none !important;
 	border: none;
